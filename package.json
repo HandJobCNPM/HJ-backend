@@ -1,0 +1,38 @@
+{
+  "name": "hj-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node ./src/app.js",
+    "db": "mongod.exe --dbpath=d:/mongodb/data/db",
+    "dbServer": "mongo.exe",
+    "dev": "concurrently \"npm run db\" \"npm run dbServer\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HandJobCNPM/HJ-backend.git"
+  },
+  "author": "BrianDoan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HandJobCNPM/HJ-backend/issues"
+  },
+  "homepage": "https://github.com/HandJobCNPM/HJ-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/eslint-parser": "^7.11.5",
+    "eslint": "^7.11.0"
+  }
+}
