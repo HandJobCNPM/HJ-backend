@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../../../middleware/auth/authenticate');
-const service = require('./userService');
+const authenticate = require('../middleware/auth/authenticate');
+const service = require('../components/auth/authService');
 
 router.get('/user/:id', authenticate, async (req, res) => {
     const resData = await service.getUser(req.params.id);

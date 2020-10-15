@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 const bodyParser = require('body-parser');
-const auth = require('./api/auth/auth');
-const user = require('./api/components/user/userController');
+const auth = require('./api/auth');
+const user = require('./api/user');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../components/user/userModel');
+const User = require('../user/userModel');
 const hash = require('../../services/hash');
 const { options } = require('../../config/jwtCfg');
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../../middleware/auth/authenticate');
-const service = require('./authService');
+const authenticate = require('../middleware/auth/authenticate');
+const service = require('../components/auth/authService');
 
 router.get('/logout', authenticate, (req, res) => {
     res.clearCookie('token');
