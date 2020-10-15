@@ -11,17 +11,30 @@ let JobObj = {
 };
 
 let userSchema = new mongoose.Schema({
-    name: String,
-    phone: String,
-    email: String,
+    name: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
+        required: true,
         select: false
     },
     photoPath: {
         type: String, default: ''
     },
-    address: String,
+    address: {
+        type: String,
+        required: true
+    },
     recruiterMode: {
         bio: String,
         achievements: [ContractObj],
