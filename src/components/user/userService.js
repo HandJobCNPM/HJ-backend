@@ -1,11 +1,13 @@
 const User = require('./userModel');
 
 module.exports = {
-    getUser: async id => {
+    getUserByEmail: async email => {
+        const user = await User.findOne({ email: email }).select('+password').exec();
+        return user ? user : null;
+    },
+
+    getUserById: async id => {
         const user = await User.findById(id).exec();
-        if (!user) {
-            return { _error: 'User not found' };
-        }
-        return { _user: user };
+        return user ? user : null;
     }
 };
