@@ -9,5 +9,12 @@ module.exports = {
     getUserById: async id => {
         const user = await User.findById(id).exec();
         return user ? user : null;
+    },
+
+    addPostedJob: async (userId, jobId, title) => {
+        const user = await User.findByIdAndUpdate({_id: userId}, {
+            $push: {'recruiterMode.postedJobs': {jobId, title}}
+        });
+        return user ? user : null;
     }
 };
