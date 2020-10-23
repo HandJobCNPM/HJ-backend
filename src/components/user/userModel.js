@@ -43,6 +43,7 @@ let userSchema = new mongoose.Schema({
     freelancerMode: {
         bio: String,
         skills: [String],
+        ratingCount: Number,
         rating: {
             type: Number,
             min: 0,
