@@ -4,7 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "server": "node ./src/app.js",
+        "server": "nodemon ./src/app.js",
         "db": "mongod.exe --dbpath=d:/mongodb/data/db",
         "dbServer": "mongo.exe",
         "dev": "concurrently \"npm run db\" \"npm run dbServer\" \"npm run server\"",
