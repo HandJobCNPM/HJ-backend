@@ -17,8 +17,8 @@ module.exports = passport => {
         done(null, user.id);
     });
 
-    passport.deserializeUser((id, done) => {
-        const user = userService.getUserById(id);
+    passport.deserializeUser(async (id, done) => {
+        const user = await userService.getUserById(id);
         let error;
         if (!user) { error = new Error('User not found'); }
         done(error, user);
