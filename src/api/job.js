@@ -22,30 +22,55 @@ router.post('/job', isLoggedIn, async (req, res) => {
         expiration,
         tags
     } = req.body;
+    let newJob;
 
-    const newJob = await jobService.createJob(
-        recruiterId,
-        title,
-        description,
-        expiration,
-        tags
-    );
+    if (recruiterId === req.user.id) {
+        newJob = await jobService.createJob(
+            recruiterId,
+            title,
+            description,
+            expiration,
+            tags
+        );
 
-    // update user profile
-    let user;
-    if (newJob) {
-        user = await userService.addPostedJob(recruiterId, newJob._id, title);
+        // update recruiter profile
+        if (newJob) {
+            userService.addJob(recruiterId, 'recruiter', newJob._id, title);
+        }
+
     }
-    res.json(newJob && user);
+    res.json(newJob);
 });
 
-// router.put('/job/:id', isLoggedIn, async (req, res) => {
-//     const job = await jobService.getJobById(req.params.id);
-//     if (job) {
-//         jobService.editJob(job._id, title, description, expiration, tags);
-//     }
+router.put('/job/:id', isLoggedIn, async (req, res) => {
+    const job = await jobService.getJobById(req.params.id);
+    if (job.recruiterId === req.user.id) {
+        jobService.editJob(job._id, title, description, expiration, tags);
+    }
 
-//     res.json(job);
-// });
+    res.json(job);
+});
+
+router.delete('/job/:id', isLoggedIn, async (req, res) => {
+    const jobId = req.params.id;
+    const userId = req.user.id;
+    const job = await jobService.getJobById(jobId);
+    let jobDeleted;
+    if (job.recruiterId === userId) {
+        jobDeleted = jobService.deleteJob(jobId);
+
+        if (jobDeleted) {
+            // update recruiter profile
+            userService.deleteJob(userId, 'recruiter', jobId);
+
+            // update candidate profiles
+            for (let candidate of job.comment) {
+                userService.deleteJob(candidate.freelancerId, 'freelancer', jobId);
+            }
+        }
+    }
+
+    res.json(jobDeleted);
+});
 
 module.exports = router;
