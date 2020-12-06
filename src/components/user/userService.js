@@ -19,8 +19,8 @@ module.exports = {
     addPostedJob: async (userId, userMode, jobId, title) => {
         const job = { jobId, title };
         const query = {
-            recruiter: { 'recruiterMode.achievements': job },
-            freelancer: { 'freelancerMode.achievements': job },
+            recruiter: { 'recruiterMode.postedJobs': job },
+            freelancer: { 'freelancerMode.postedJobs': job },
         };
         const user = await User.findByIdAndUpdate({_id: userId}, {
             $push: query[userMode]
