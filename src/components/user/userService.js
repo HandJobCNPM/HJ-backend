@@ -16,11 +16,11 @@ module.exports = {
         return user ? user : null;
     },
 
-    addPostedJob: async (userId, userMode, jobId, title) => {
+    addJob: async (userId, userMode, jobId, title) => {
         const job = { jobId, title };
         const query = {
             recruiter: { 'recruiterMode.postedJobs': job },
-            freelancer: { 'freelancerMode.postedJobs': job },
+            freelancer: { 'freelancerMode.appliedJobs': job },
         };
         const user = await User.findByIdAndUpdate({_id: userId}, {
             $push: query[userMode]
@@ -68,5 +68,16 @@ module.exports = {
     deleteUser: async userId => {
         await User.deleteOne({ _id: userId });
         return true;
+    },
+
+    deleteJob: async (userId, userMode, jobId) => {
+        const query = {
+            recruiter: { 'recruiterMode.postedJobs': { jobId: jobId } },
+            freelancer: { 'freelancerMode.appliedJobs': { jobId: jobId } },
+        };
+        const user = await User.findByIdAndUpdate({_id: userId}, {
+            $pull: query[userMode]
+        });
+        return user ? user : null;
     }
 };

@@ -23,13 +23,18 @@ module.exports = {
         return job ? job : null;
     },
 
-    // editJob: (id, title, description, expiration, tags) => {
-    //     Job.updateOne({_id: id}, {
-    //         title,
-    //         description,
-    //         expiration,
-    //         tags
-    //     });
-    //     return true;
-    // }
+    editJob: (id, title, description, expiration, tags) => {
+        Job.updateOne({_id: id}, {
+            title,
+            description,
+            expiration,
+            tags
+        });
+        return true;
+    },
+
+    deleteJob: jobId => {
+        Job.deleteOne({ _id: jobId });
+        return true;
+    }
 };
