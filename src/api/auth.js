@@ -5,7 +5,6 @@ const passport = require('passport');
 const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
 
 router.get('/', isLoggedIn, (req, res) => {
-    console.log('abc')
     res.redirect('/job')
 })
 

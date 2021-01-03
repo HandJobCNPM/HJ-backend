@@ -6,7 +6,13 @@ const userService = require('../components/user/userService');
 
 router.get('/', async (req, res) => {
     const jobs = await jobService.getAllJobs();
-    res.json(jobs);
+
+    if (req.isAuthenticated()) {
+        res.render('jobs', { role: "user", jobs })
+    } else {
+        res.render('jobs', { role: "guest", jobs })
+    }
+
 });
 
 router.get('/:id', async (req, res) => {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') -%>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <main class="container all-job flex f-center">
+        <aside class="panel col-md-3 d-none d-md-block border border-primary mr-3">
+            <button class="btn btn-outline-warning btn-lg ml-4" type="submit">Apply filters</button>
+        </aside>
+        <div class="panel col-md-8 col-12 text-center border border-primary">
+            <nav class="flex f-space-between">
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Sort</button>
+            </nav>
+            <article class="job-list">
+                <section>
+                    <header class="flex f-space-between">
+                        <h3 class="title text-left">Mình cần gấp chiều 22/10 chỉnh sửa ảnh CMND bị mờ</h3>
+                        <div class="price text-right">0 đ - 5.000.000 đ</div>
+                    </header>
+                    <main>
+                        <p class="text-left summary">khôi phục hình ảnh bị mờ biết photoshop ảnh bị lóa do chụp sáng sửa lóa sửa quê quán quốc tịch cần gấp
+                            trong 16h làm ngay hôm nay chuyển khoản ngay hôm nay làm 2 ảnh mặt trước và mặt sau tài...</p>
+                    </main>
+                    <footer class="flex f-space-between">
+                        <div class="flex">
+                            <div class="badge badge-warning">Experience</div>
+                            <div class="badge badge-warning">Skill</div>
+                            <div class="badge badge-warning">Tech</div>
+                        </div>
+                        <div class="deadline">Hạn nhận hồ sơ: 23 giờ 18 phút</div>
+                    </footer>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/script.ejs') %>
+</body>
+
+</html>
