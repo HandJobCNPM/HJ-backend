@@ -8,7 +8,7 @@
         "db": "mongod.exe --dbpath=d:/mongodb/data/db",
         "dbServer": "mongo.exe",
         "dev": "concurrently \"npm run db\" \"npm run dbServer\" \"npm run server\"",
-        "start": "nodemon ./src/app.js -e ejs"
+        "start": "nodemon ./src/app.js"
     },
     "repository": {
         "type": "git",
@@ -23,11 +23,15 @@
     "dependencies": {
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
+        "compression": "^1.7.4",
         "concurrently": "^5.3.0",
         "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.5",
         "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "helmet": "^4.3.1",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.10.8",
         "morgan": "^1.10.0",

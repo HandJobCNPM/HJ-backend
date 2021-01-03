@@ -1,0 +1,171 @@
+:root {
+    --background: #17A2B8;
+}
+
+body {
+	font-family: sans-serif;
+	background-image: url('/img/bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 16px;
+}
+
+.footer p {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.f-column {
+    flex-direction: column;
+}
+
+.f-space-between {
+    justify-content: space-between;
+}
+
+.f-center {
+    justify-content: center;
+}
+
+.fv-center {
+    align-items: center;
+}
+
+.bg-color {
+    background-color: var(--background);
+}
+
+/* LOGIN */
+
+.login {
+  border: 1px solid grey;
+  border-radius: 10px;
+  max-width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: black;
+  opacity: 0.75;
+}
+.login h2 {
+  color: white;
+  text-align: center;
+}
+.login p {
+  display: inline-block;
+  padding-left: 30px;
+  margin: 0px;
+  text-align: left !important;
+  color: white;
+}
+.login input {
+  width: 350px;
+  height: 50px;
+  padding-left: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: black;
+  color: white;
+}
+.login a {
+  text-decoration: none;
+  margin-top: 20px;
+}
+.login:hover button {
+  color: black;
+  background-color: #3350ff;
+}
+.login button {
+  width: 350px;
+  height: 50px;
+  border: 1px;
+  border-radius: 50px;
+  background-color: #3300ff;
+  color: white;
+  outline: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  outline: none;
+}
+.login-check {
+  padding-left: 30px;
+  color: white;
+}
+.login-check input {
+  width: 15px;
+  height: 15px;
+}
+.check-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+/* REGISTER */
+
+.form {
+    border: 1px solid grey;
+    border-radius: 10px;
+    max-width: 400px;
+    background-color: black;
+    padding: 25px 30px 25px 30px;
+    opacity: 0.8;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.form-fill p {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: white;
+}
+
+.form-fill input {
+    width: 350px;
+    height: 50px;
+    padding-left: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+}
+
+.form-submit {
+    height: 50px;
+    border: 1px;
+    border-radius: 50px;
+    background-color: #3300ff;
+    color: white;
+    outline: none;
+    margin-top: 20px;
+}
+
+.form:hover button {
+    color: black;
+    background-color: #3350ff;
+}

@@ -3,7 +3,11 @@
 <%- include('./partials/head.ejs') -%>
 
 <body>
-    <%- include('./partials/header.ejs') %>
+    <% if (form === 'signup') { %>
+        <%- include('./signup') -%> 
+    <% } else { %>
+        <%- include('./login') -%> 
+    <% } %>
 
     <%- include('./partials/footer.ejs') %>
     <%- include('./partials/script.ejs') %>

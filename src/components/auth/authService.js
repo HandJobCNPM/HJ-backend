@@ -2,18 +2,16 @@ const User = require('../user/userModel');
 const hash = require('../../services/hash');
 
 module.exports = {
-    signup: async (name, phone, email, password, address) => {
+    signup: async (name, email, password) => {
         const user = await User.findOne({ email: email }).exec();
         if (user) {
             return false;
         }
-        const hashedPwd = hash.hashPwd(password);
+        const hashedPwd = await hash.hashPwd(password);
         User.create({
             name,
-            phone,
             email,
             password: hashedPwd,
-            address
         });
         return true;
     }

@@ -49,4 +49,4 @@ let jobSchema = new mongoose.Schema({
     comment: [CandidateObj]
 });
 
-module.exports = Job = mongoose.model('Job', jobSchema);
+module.exports = Job = mongoose.model('Jobs', jobSchema);

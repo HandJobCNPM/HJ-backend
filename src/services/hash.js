@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
+const SALT = 10
 
 module.exports = {
     hashPwd: password => {
-        const salt = bcrypt.genSaltSync(10);
-        return bcrypt.hashSync(password, salt);
+        return bcrypt.hash(password, SALT)
     },
 
     isPwdMatched: (password, hash) => {

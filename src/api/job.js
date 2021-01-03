@@ -4,17 +4,17 @@ const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
 const jobService = require('../components/job/jobService');
 const userService = require('../components/user/userService');
 
-router.get('/job', async (req, res) => {
+router.get('/', async (req, res) => {
     const jobs = await jobService.getAllJobs();
     res.json(jobs);
 });
 
-router.get('/job/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const job = await jobService.getJobById(req.params.id);
     res.json(job);
 });
 
-router.post('/job', isLoggedIn, async (req, res) => {
+router.post('/', isLoggedIn, async (req, res) => {
     const {
         recruiterId,
         title,
@@ -42,7 +42,7 @@ router.post('/job', isLoggedIn, async (req, res) => {
     res.json(newJob);
 });
 
-router.put('/job/:id', isLoggedIn, async (req, res) => {
+router.put('/:id', isLoggedIn, async (req, res) => {
     const job = await jobService.getJobById(req.params.id);
     if (job.recruiterId === req.user.id) {
         jobService.editJob(job._id, title, description, expiration, tags);
@@ -51,7 +51,7 @@ router.put('/job/:id', isLoggedIn, async (req, res) => {
     res.json(job);
 });
 
-router.delete('/job/:id', isLoggedIn, async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
     const jobId = req.params.id;
     const userId = req.user.id;
     const job = await jobService.getJobById(jobId);
