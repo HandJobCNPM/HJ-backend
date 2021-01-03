@@ -4,18 +4,21 @@ const mongoose = require('mongoose');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 const session = require('express-session');
+const expressValidator = require('express-validator');
+
 
 // Security
-const helmet = require('helmet')
-const cors = require('cors')
+const helmet = require('helmet');
+const cors = require('cors');
 require('dotenv/config');
 
 // Authentication
 const passport = require('passport');
 require('./config/passport')(passport);
 
-const auth = require('./api/auth')
+const auth = require('./api/auth');
 const job = require('./api/job');
 
 const _env = process.env;
@@ -26,8 +29,8 @@ app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 
-app.use(helmet())
-app.use(cors())
+app.use(helmet());
+app.use(cors());
 
 // Log request and response
 app.use(morgan('dev'));
@@ -41,6 +44,7 @@ app.use(express.urlencoded({
 // Store css, js and bootstrap
 app.use(express.static(path.join(__dirname, '../views/public')));
 
+
 app.use(session({
     secret: _env.SECRET,
     resave: true,
@@ -49,7 +53,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', auth)
+// Connect flash
+app.use(flash());
+app.use(function (req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+app.use('/', auth);
 app.use('/job', job);
 
 mongoose

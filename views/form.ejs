@@ -3,9 +3,12 @@
 <%- include('./partials/head.ejs') -%>
 
 <body>
+    
     <% if (form === 'signup') { %>
+        <%- include ("./partials/messages") %>
         <%- include('./signup') -%> 
     <% } else { %>
+        <%- include ("./partials/messages") %>
         <%- include('./login') -%> 
     <% } %>
 
