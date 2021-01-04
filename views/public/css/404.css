@@ -1,0 +1,15 @@
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin-left: 850px;
+}
+h1{
+    color: #000000;
+    font-size: 130px;
+    margin-bottom: -40px;
+}
+h2{
+    color: #000000;
+    font-size: 30px;
+    margin-bottom: 0px;
+}

@@ -1,4 +1,17 @@
-function validate(name, email, password, confirmPassword) {
+const expressValidator = require('express-validator');
+
+exports.validateLogin = (email, password) => {
+    let errors = [];
+    if (!email || !password) {
+        errors.push({ msg: 'Please fill in all fields.' });
+    }
+    if (password.length < 6) {
+        errors.push({ msg: 'Password to short.' });
+    }
+    return (errors.length > 0) ? errors : 'Success';
+}
+
+exports.validateSignup = (name, email, password, confirmPassword) => {
     let errors = [];
 
     // Check required fields
@@ -18,7 +31,3 @@ function validate(name, email, password, confirmPassword) {
 
     return (errors.length > 0) ? errors : 'Success';
 }
-
-module.exports = {
-    validateSignup: validate
-};

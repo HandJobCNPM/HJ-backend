@@ -4,21 +4,21 @@
         <h2 class="form-title text-light">Đăng nhập</h2>
         <div class="form-fill">
             <p>Email</p>
-            <div class="btn-container">
-                <input type="text"
-                            placeholder="yourmail@mail.com"
-                            name="email">
-            </div>
+            <input type="email"
+                    placeholder="yourmail@mail.com"
+                    name="email"
+                    id="login-email">
+            <p id="login-email-error" class="invalid-message"></p>
         </div>
         <div class="form-fill">
             <p>Mật khẩu</p>
-            <div class="btn-container">
-                <input type="password"
-                            placeholder="Mật khẩu"
-                            name="password">
-            </div>
+            <input type="password"
+                    placeholder="Mật khẩu"
+                    name="password"
+                    id="login-password">
+            <p id="login-password-error" class="invalid-message"></p>
         </div>
-        <button class="form-submit" type="submit">Đăng nhập</button>    
+        <button class="form-submit" id="login" type="submit" disabled="disabled">Đăng nhập</button>    
     </form>
 </main>
 

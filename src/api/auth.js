@@ -14,11 +14,20 @@ router.get('/logout', isLoggedIn, (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('form', { form: 'login' })
+    if (req.isAuthenticated()) {
+        res.redirect('/job')
+    } else {
+        res.render('form', { form: 'login' })
+    }
 })
 
 router.get('/signup', (req, res) => {
-    res.render('form', { form: 'signup' })
+    if (req.isAuthenticated()) {
+        res.redirect('/job')
+    } else {
+        res.render('form', { form: 'signup' })
+    }
+
 })
 
 router.post('/login', passport.authenticate('local', {
@@ -29,9 +38,9 @@ router.post('/login', passport.authenticate('local', {
 });
 
 router.post('/signup', async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
-    let signup = await service.signup(name, email, password);
+    let signup = await service.signup(name, email, password, confirmPassword);
 
     res.redirect('/login')
 });

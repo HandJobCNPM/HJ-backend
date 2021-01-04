@@ -5,36 +5,36 @@
         <h2 class="form-title text-light">Tạo tài khoản</h2>
         <div class="form-fill">
             <p>Họ và tên</p>
-            <div class="btn-container">
-                <input type="text"
-                            placeholder="Nguyễn Vắn A"
-                            name="name">
-            </div>
+            <input type="text"
+                    placeholder="Nguyễn Vắn A"
+                    name="name"
+                    id="signup-name">
+            <p id="signup-name-error" class="invalid-message"></p>
         </div>
         <div class="form-fill">
             <p>Email</p>
-            <div class="btn-container">
-                <input type="text"
-                            placeholder="yourmail@mail.com"
-                            name="email">
-            </div>
+            <input type="text"
+                    placeholder="yourmail@mail.com"
+                    name="email"
+                    id="signup-email">
+            <p id="signup-email-error" class="invalid-message"></p>
         </div>
         <div class="form-fill">
             <p>Mật khẩu</p>
-            <div class="btn-container">
-                <input type="password"
-                            placeholder="Mật khẩu"
-                            name="password">
-            </div>
+            <input type="password"
+                    placeholder="Mật khẩu"
+                    name="password"
+                    id="signup-password">
+            <p id="signup-password-error" class="invalid-message"></p>
         </div>
         <div class="form-fill">
             <p>Xác nhận mật khẩu</p>
-            <div class="btn-container">
-                <input type="password"
-                            placeholder="Mật khẩu"
-                            name="confirmPassword">
-            </div>
+            <input type="password"
+                    placeholder="Mật khẩu"
+                    name="confirmPassword"
+                    id="signup-password-confirm">
+            <p id="signup-confirm-password-error" class="invalid-message"></p>
         </div>
-        <button class="form-submit" type="submit">Đăng ký</button>
+        <button class="form-submit" id="signup" type="submit" disabled>Đăng ký</button>
     </form>
 </main>
