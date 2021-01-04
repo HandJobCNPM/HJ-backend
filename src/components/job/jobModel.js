@@ -46,6 +46,14 @@ let jobSchema = new mongoose.Schema({
         required: true
     },
     tags: [String],
+    paidMin: {
+        type: Number,
+        required: true
+    },
+    paidMax: {
+        type: Number,
+        required: true
+    },
     comment: [CandidateObj]
 });
 

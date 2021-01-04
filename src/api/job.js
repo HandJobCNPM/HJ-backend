@@ -22,36 +22,38 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', isLoggedIn, async (req, res) => {
     const {
+        title,
+        description,
+        expiration,
+        tags,
+        paidMin,
+        paidMax
+    } = req.body;
+    let newJob;
+
+    recruiterId = req.user.id;
+    newJob = await jobService.createJob(
         recruiterId,
         title,
         description,
         expiration,
-        tags
-    } = req.body;
-    let newJob;
+        tags,
+        paidMin,
+        paidMax
+    );
 
-    if (recruiterId === req.user.id) {
-        newJob = await jobService.createJob(
-            recruiterId,
-            title,
-            description,
-            expiration,
-            tags
-        );
-
-        // update recruiter profile
-        if (newJob) {
-            userService.addJob(recruiterId, 'recruiter', newJob._id, title);
-        }
-
+    // update recruiter profile
+    if (newJob) {
+        userService.addJob(recruiterId, 'recruiter', newJob._id, title);
     }
+
     res.json(newJob);
 });
 
 router.put('/:id', isLoggedIn, async (req, res) => {
     const job = await jobService.getJobById(req.params.id);
     if (job.recruiterId === req.user.id) {
-        jobService.editJob(job._id, title, description, expiration, tags);
+        jobService.editJob(job._id, title, description, expiration, tags, paidMin, paidMax);
     }
 
     res.json(job);
