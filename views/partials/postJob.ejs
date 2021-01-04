@@ -1,4 +1,5 @@
 <div class="modal fade" id="PostJob">
+    <form action="/job" method="POST">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,8 +8,8 @@
             <div class="modal-body">
                 <div class="modal-fill">
                     <h5>Đặt tên cụ thể cho công việc cần tuyển</h5>
-                    <input type="text" 
-                        placeholder="VD: Thiết kế web bán hàng đa cấp">    
+                    <input name="title" type="text" 
+                        placeholder="VD: Thiết kế web bán hàng đa cấp" required>    
                 </div>
 
                 <div class="modal-fill">
@@ -16,25 +17,24 @@
                     <p>Nội dung chi tiết, và các đầu việc cần Freelancer thực hiện (càng chi
                         tiết,
                         freelancer càng có đầy đủ thông tin để gửi báo giá chính xác hơn).</p>
-                    <input type="text"
-                        placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,...">
+                    <input name="description" type="text"
+                        placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required>
                 </div>
                 
                 <div class="modal-fill">
                     <h5>Kỹ năng yêu cầu freelancer phải có</h5>
-                    <input type="text" 
-                        placeholder="VD: HTML,CSS,JS,...">
+                    <input name="tags" type="text" 
+                        placeholder="VD: HTML,CSS,JS,..." required>
                 </div>
                 
                 <div class="modal-fill">
                     <h5>Hạn cuối nhận chào giá của freelancer</h5>
-                    <input type="text" placeholder="VD: 22/11/2020">
+                    <input name="expiration" type="date" required>
                 </div>
                 
                 <div class="modal-fill">
                     <h5>Số tiền tối đa tôi có thể trả trong khoảng</h5>
-                    <input type="text" placeholder="Từ">
-                    <input type="text" placeholder="Đến">VND
+                    <input name="paidMin" type="number" placeholder="Từ" required> - <input name="paidMax" type="number" placeholder="Đến" required>VND
                 </div>
                 
             </div>
@@ -43,4 +43,5 @@
             </div>
         </div>
     </div>
+    </form>
 </div>
