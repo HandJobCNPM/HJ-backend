@@ -1,5 +1,8 @@
 :root {
     --background: #17A2B8;
+    --valid: #339933;
+    --invalid: #cc0000;
+    --disabled: gray;
 }
 
 body {
@@ -13,6 +16,10 @@ body {
 h3 {
     font-size: 20px;
     font-weight: bold;
+}
+
+p {
+    margin: 0;
 }
 
 .footer {
@@ -48,12 +55,48 @@ h3 {
     justify-content: center;
 }
 
+.f-right {
+    justify-content: flex-end;
+}
+
 .fv-center {
     align-items: center;
 }
 
 .bg-color {
     background-color: var(--background);
+}
+
+[show="false"] {
+    display: none;
+}
+
+[show="true"] {
+    display: block;
+}
+
+#show-profile-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;   
+    z-index: 1000;
+}
+
+.show-profile-box {
+    width:200px;
+    background: white;
+    position: absolute;
+    top: 40px;
+    right: 120px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.show-profile-box a {
+    color: black !important;
 }
 
 .form {
@@ -97,7 +140,7 @@ h3 {
     margin-top: 20px;
 }
 
-.form:hover button {
+.form-submit:hover {
     color: black;
     background-color: #3350ff;
 }
@@ -141,4 +184,48 @@ h3 {
 
 .modal-fill {
     padding-bottom: 20px;
+}
+
+[fill="valid"] {
+    border-color: var(--valid) !important;
+}
+
+[fill="invalid"] {
+    border-color: var(--invalid) !important;
+    color: var(--invalid) !important;
+}
+
+button:disabled {
+    background-color: var(--disabled);
+    color: black;
+}
+
+button:disabled:hover {
+    background-color: var(--disabled);
+    color: black;
+}
+
+.invalid-message {
+    color: var(--invalid) !important;
+    font-size: 12px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 !important;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.profile {
+    min-height: calc(100vh - 56px);
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.profile-box {
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }

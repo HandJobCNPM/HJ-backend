@@ -1,7 +1,7 @@
 <div class="Header">
     <nav class="navbar navbar-nav navbar-expand-md navbar-dark bg-info">
         <div class="col-lg-2 col-md-2">
-            <a class="navbar-brand" href="#">HandJob</a>
+            <a class="navbar-brand" href="/job">HandJob</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -9,48 +9,29 @@
             </button>
         </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav col-12">
-                <li class="nav-item active dropdown col-md-3 ">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Thuê Freelancer
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Đăng việc theo dự án</a>
-                        <a class="dropdown-item" href="#">Đăng việc bán thời gian</a>
-                        <a class="dropdown-item" href="#">Đăng việc toàn thời gian</a>
-                </li>
-                <li class="nav-item active dropdown col-md-3 ">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tỉm việc làm
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Việc theo dự án</a>
-                        <a class="dropdown-item" href="#">Việc bán thời gian</a>
-                        <a class="dropdown-item" href="#">Việc toàn thời gian</a>
-                </li>
+        <div class="collapse navbar-collapse flex f-right" id="navbarSupportedContent">
+            <ul class="navbar-nav flex f-right fv-center">
                 <% if (role === "guest") { %>
-                    <li class="nav-item active col-md-2 ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/signup">Đăng kí <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active col-md-2 ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/login">Đăng nhập <span class="sr-only">(current)</span></a>
                     </li>
                 <% } else { %>
-                    <li class="nav-item active dropdowm col-md-4">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="logoPerson.jpg" alt="Ảnh đại diện" style="width: 30px;height: 30px;"> Trung
-                            Lương
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
+                    <li class="nav-item active dropdowm">
+                        <div class="flex fv-center" id="show-profile">
+                            <img src="logoPerson.jpg" alt="" style="width: 30px;height: 30px;">
+                            <p class="text-light">Trung Lương</p>
+                        </div>
+                        <div show="false" id="show-profile-panel">
+                            <div class="show-profile-box">
+                                <a class="nav-link" href="/user">Trang cá nhân <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/logout">Đăng xuất <span class="sr-only">(current)</span></a>
+                            </div>
                         </div>
                     </li>
-                    <li class="nav-item active col-md-2">
+                    <li class="nav-item active">
                         <button class="btn btn-success" data-toggle="modal" data-target="#PostJob">
                             Đăng việc
                         </button>

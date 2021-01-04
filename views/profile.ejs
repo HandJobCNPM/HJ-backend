@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') -%>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <div class="container profile flex f-center fv-center">
+        <div class="profile-box container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 mt-3">
+                    <img src="/img/logoPerson.jpg" alt="Ảnh đại diện" style="width: 200px;height: 200px;">
+                    <p>Online cuối: 25/10/2020 </p>
+                </div>
+                <div class="col-lg-4 col-md-4 mt-3">
+                    <p><%= user.name %> 
+                        <button>Cập nhật thông tin</button>
+                    </p>
+                    <p>Toàn quốc</p>
+                    <p>Freelancer đang cập nhật kỹ năng</p>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-4 border border-secondary mt-3">
+                    <h4 class="text-center pt-2">Thông tin liên lạc</h4>
+                    <div class="mt-4">
+                        <img src="/img/lgEmail.jpg" alt="logoEmail" style="width: 30px;height: 30px;"> <%= user.email %> 
+                        <br>
+                        <img src="/img/lgPhone.jpg" alt="logoPhone" style="width: 30px;height: 30px;"> <%= user.phone %> 
+                    </div>
+                </div>
+            </div>
+            <div class="CV mt-5">
+                <h4>Hồ sơ năng lực</h4>
+                <p>Hiện tại chưa có hồ sơ</p>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+    <%- include('./partials/script.ejs') %>
+</body>
+
+</html>
