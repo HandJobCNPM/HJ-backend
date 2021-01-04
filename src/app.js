@@ -19,7 +19,7 @@ require('./config/passport')(passport);
 
 const auth = require('./api/auth');
 const job = require('./api/job');
-const user = require('./api/user')
+const user = require('./api/user');
 
 const _env = process.env;
 const app = express();
@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
 
 app.use('/', auth);
 app.use('/job', job);
-app.use('/user', user)
+app.use('/user', user);
 
 mongoose
     .connect(_env.DEV_DB, {
