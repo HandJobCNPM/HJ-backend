@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
     const jobs = await jobService.getAllJobs();
 
     if (req.isAuthenticated()) {
-        res.render('jobs', { role: "user", jobs })
+        res.render('jobs', { role: 'user', jobs });
     } else {
-        res.render('jobs', { role: "guest", jobs })
+        res.render('jobs', { role: 'guest', jobs });
     }
 
 });
