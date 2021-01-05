@@ -39,7 +39,7 @@ let userSchema = new mongoose.Schema({
     recruiterMode: {
         bio: {
             type: String,
-            default: ""
+            default: ''
         },
         achievements: [ContractObj],
         postedJobs: [JobObj]
@@ -47,7 +47,7 @@ let userSchema = new mongoose.Schema({
     freelancerMode: {
         bio: {
             type: String,
-            default: ""
+            default: ''
         },
         skills: [String],
         ratingCount: Number,
