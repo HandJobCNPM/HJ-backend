@@ -1,14 +1,14 @@
 const User = require('../user/userModel');
 const hash = require('../../services/hash');
-const { validateSignup } = require('./validate')
+const { validateLogin, validateSignup } = require('./validate');
 
 module.exports = {
     signup: async (name, email, password, confirmPassword) => {
-        let validate = validateSignup(name, email, password, confirmPassword)
+        let validate = validateSignup(name, email, password, confirmPassword);
         if (validate === 'Success') {
             const user = await User.findOne({ email: email }).exec();
             if (user) {
-                return { title: "email", message: "Exist email", name, email: "", password };
+                return { title: 'email', message: 'Exist email', name, email: '', password };
             }
             const hashedPwd = await hash.hashPwd(password);
             User.create({
@@ -19,6 +19,6 @@ module.exports = {
             return true;
         }
 
-        return validate
+        return validate;
     },
 };
