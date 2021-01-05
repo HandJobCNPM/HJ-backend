@@ -1,47 +1,48 @@
 <div class="modal fade " id="PostJob">
     <form action="/job" method="POST">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Đăng việc</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-fill">
-                    <p>Tên công việc</p>
-                    <input name="title" type="text" 
-                        placeholder="VD: Thiết kế web bán hàng đa cấp" required>    
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Đăng việc</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <div class="modal-fill">
+                        <p>Tên công việc</p>
+                        <input name="title" type="text" 
+                            placeholder="VD: Thiết kế web bán hàng đa cấp" required>    
+                    </div>
 
-                <div class="modal-fill">
-                    <p>Chi tiết công việc</p>
-                    <textarea name="description" type="text"
-                        placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required rows="5" cols="90"></textarea>
+                    <div class="modal-fill">
+                        <p>Chi tiết công việc</p>
+                        <textarea name="description" type="text"
+                            placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required rows="5" cols="90"></textarea>
+                    </div>
+                    
+                    <div class="modal-fill">
+                        <p>Yêu cầu kỹ năng, framework, ...</p>
+                        <input name="tags" type="text" 
+                            placeholder="VD: HTML,CSS,JS,..." required>
+                    </div>
+                    
+                    <div class="modal-fill">
+                        <p>Hạn nhận chào giá</p>
+                        <input name="expiration" type="date" required>
+                    </div>
+                    
+                    <div class="modal-fill">
+                        <p>Tiền trả công việc</p>
+                        <input name="paidMin" type="number" placeholder="Từ" required> - <input name="paidMax" type="number" placeholder="Đến" required> VND
+                    </div>
+                    <input type="hidden" name="recruiterId" value="<%= id %>">
+                    <input type="hidden" name="recruiterName" value="<%= username %>">
                 </div>
-                
-                <div class="modal-fill">
-                    <p>Yêu cầu kỹ năng, framework, ...</p>
-                    <input name="tags" type="text" 
-                        placeholder="VD: HTML,CSS,JS,..." required>
+                <div class="modal-footer">
+                    <button class="btn btn-warning btn-lg btn-block" type="submit">Đăng việc</button>
                 </div>
-                
-                <div class="modal-fill">
-                    <p>Hạn nhận chào giá</p>
-                    <input name="expiration" type="date" required>
-                </div>
-                
-                <div class="modal-fill">
-                    <p>Tiền trả công việc</p>
-                    <input name="paidMin" type="number" placeholder="Từ" required> - <input name="paidMax" type="number" placeholder="Đến" required> VND
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-warning btn-lg btn-block" type="submit">Đăng việc</button>
             </div>
         </div>
-    </div>
     </form>
 </div>

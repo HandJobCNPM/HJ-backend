@@ -5,10 +5,6 @@ let CandidateObj = {
         type: String,
         required: true
     },
-    freelancerPhotoUrl: {
-        type: String,
-        required: true
-    },
     freelancerId: {
         type: String,
         required: true
@@ -29,6 +25,10 @@ let CandidateObj = {
 
 let jobSchema = new mongoose.Schema({
     recruiterId: {
+        type: String,
+        required: true
+    },
+    recruiterName: {
         type: String,
         required: true
     },
@@ -58,7 +58,7 @@ let jobSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    comment: [CandidateObj]
+    comments: [CandidateObj]
 });
 
 module.exports = Job = mongoose.model('Jobs', jobSchema);

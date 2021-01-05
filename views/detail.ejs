@@ -5,553 +5,229 @@
 <body>
     <%- include('./partials/header.ejs') %>
 
-    <div class="container" style="background-color: white;">
-        <div class="row mb-5">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-3">
-                <p>App Karaoke online (Android , ios)
-                    Dịch vụ cần thuê: Làm Mobile App theo yêu cầu
-                    Bạn có thể cung cấp dịch vụ này? Thêm vào hồ sơ làm việc.
-                    tham khảo starmaker, wesing
-                    đăng ký, đăng nhập = sdt, facebook, zalo
-                    có hệ thống xếp hạng bài hát, bài hát đã thu âm, ca sĩ theo tiêu chí (Ngày tháng năm)
-                    Theo dõi, kết bạn, Nghe ca khúc bạn bè đã hát, thông tin bạn bè (giống social network)
-                    Có thể nhắn tin qua lại
-                    Thu âm bài hát qua beat (mp3) và file lyric (lrc) , lyric chạy chữ
-                    Trong lúc thu âm có thể xử lý âm thanh (thay đổi âm hiệu, chỉnh volume lớn nhỏ beat và voice)
-                    Hoặc xử lý âm thanh sau khi kết thúc thu âm bài hát
-                    Thu âm có thể vuốt lên xuống câu mình muốn hát (Ví dụ đang hát câu 8, có thể vuốt xuống câu 12 hát
-                    hoặc vuốt lên câu 5 hát lại từ câu 5)
-                    Có thể thu âm đơn ca, song ca , MV đơn ca, MV song ca
-                    Sau khi thu âm, xử lý âm thanh , có thể lưu về máy, share lên trang cá nhân, facebook, zalo
-                    Song ca có thể chọn từng câu để hát (hiển thị thông qua màu sắc , ví dụ chọn màu xanh là mình hát,
-                    màu vàng là đối phương hát...)
-                    User có thể nghe ca khúc của bạn khi đã thu âm, có thể like, bình luận, tặng quà....
-                    Có thể tạo phòng livestream để hát
-                    + Phòng livestream có chức năng livestream = camera hoặc chỉ phát âm thanh (User có thể chọn 1 trong
-                    2 hình thức)
-                    + Chủ phòng có thể thêm quản lý phòng, MC phòng, kick thành viên trong phòng, quản lý cũng có thể
-                    kick thành viên
-                    + Phòng có chức năng xếp lượt hát (User có thể đăng ký lượt hát). Khi 1 user hát xong thì người kế
-                    tiếp sẽ lên mic hát bài hát mình đã chọn.
-                    + Phòng có chức năng tặng quà khi livestream, có hiệu ứng khi user vào phòng
-                    + Phòng có thể chịu được lượng lớn user vào, không bị lag, giật
-                    Có hệ thống làm nhiệm vụ để nhận vật phẩm miễn phí (ví dụ điểm danh hàng ngày, hát 1 bài hát, tặng
-                    quà...)
-                    Có chức năng tạo nhóm thành viên (Ví dụ Hội đam mê ca hát) để thu hút user tham gia chung 1 nhóm.
-                    Có thể thêm và thay đổi event dễ dàng..
-                    Có chức năng nạp tiền, rút tiền
-                    Chi tiết sẽ trao đổi kỹ khi làm việc.
-                </p>
-                <p>Kỹ năng</p>
-                <p class="badge badge-secondary">IOS</p>
-                <p class="badge badge-secondary">ANDROID</p>
-                <p class="badge badge-secondary">THU ÂM</p>
-                <br>
-                <p class="badge badge-primary">Like</p>
-                <p class="badge badge-primary">Share</p>
-            </div>
-            <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 col-12 border border-secondary mt-3">
-                <h5>Thông tin dự án</h5>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>ID dự án</p>
+    <div class="container job-detail flex f-center">
+        <div class="job-detail-box container-fluid">
+            
+            <div class="row job-detail-content">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <h2 class="job-detail-title"><%= job.title %></h2>
+                    <p>
+                        <%= job.description %> 
+                    </p>
+                    <p class="job-skill">Kỹ năng</p>
+                    <div class="flex">
+                        <% job.tags.forEach(tag => { %>
+                            <div class="badge badge-warning"><%= tag %></div>
+                        <% }) %>
                     </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>12345</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Ngày đăng</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>29/11/2020</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Chỉ còn</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>10 ngày 3 giờ</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Địa điểm</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Toàn quốc</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Ngân sách</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>100.000.000đ - 200.000.000đ</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Hình thức làm việc</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Làm online</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <p>Hình thức trả lương</p>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Trả theo dự án</p>
-                    </div>
-                </div>
-                <br>
-                <h5>Thông tin khách hàng</h5>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-4">
-                        <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 100px;height: 100px;">
-                    </div>
-                    <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
-                        <p>Nguyễn Văn A</p>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-4">
-                        <p>Đến từ</p>
-                    </div>
-                    <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
-                        <p>Toàn quốc</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-4">
-                        <p>Tham gia</p>
-                    </div>
-                    <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
-                        <p>29/11/2020</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-4">
-                        <p>Đã đăng</p>
-                    </div>
-                    <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
-                        <p>1 việc</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row border bg pt-4 pb-5 mb-4">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
-                <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
-            </div>
-            <div class="col-lg-5 col-md-9 col-sm-8 col-12">
-                <div class="row">
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                        <h5>Trương Văn B</h5>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                            Deal
-                        </button>
-                    </div>
-                    <div class="modal fade" id="DealJob">
-                        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title">Thỏa thuận</h1>
-                                </div>
-                                <div class="modal-body row">
-                                    <div class="col-md-10 offset-md-2">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>ID dự án</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>12345</p>
-                                            </div>
+                    <button data-toggle="modal" data-target="#EditJob">Chỉnh sửa công việc</button>
+                    <div class="modal fade " id="EditJob">
+                        <form action="/job/<%= job._id %>?_method=PUT" method="POST">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title">Đăng việc</h1>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-fill">
+                                            <p>Tên công việc</p>
+                                            <input name="title" type="text" 
+                                                placeholder="VD: Thiết kế web bán hàng đa cấp"
+                                                value="<%= job.title %>"
+                                                required>    
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên nhà tuyển dụng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Nguyễn Văn A</p>
-                                            </div>
+
+                                        <div class="modal-fill">
+                                            <p>Chi tiết công việc</p>
+                                            <textarea name="description" 
+                                                type="text"
+                                                placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required rows="5" cols="90">
+                                                <%= job.description %>
+                                            </textarea>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên Freelancer</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trương Văn B</p>
-                                            </div>
+                                        
+                                        <div class="modal-fill">
+                                            <p>Yêu cầu kỹ năng, framework, ...</p>
+                                            <input name="tags" 
+                                                type="text" 
+                                                value="<%= job.tags.join(',') %>"
+                                                placeholder="VD: HTML,CSS,JS,..." required>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày đăng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>29/11/2020</p>
-                                            </div>
+                                        
+                                        <div class="modal-fill">
+                                            <p>Hạn nhận chào giá</p>
+                                            <input name="expiration" 
+                                                type="date" 
+                                                value="<%= job.expiration %>"
+                                                required>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày deal</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>3/12/2020</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngân sách</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>100.000.000đ - 200.000.000đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức làm việc</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Làm online</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức trả lương</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trả theo dự án</p>
-                                            </div>
-                                        </div>
-                                        <div class="login-check">
-                                            <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
+                                        
+                                        <div class="modal-fill">
+                                            <p>Tiền trả công việc</p>
+                                            <input name="paidMin" 
+                                                type="number" 
+                                                placeholder="Từ" 
+                                                value="<%= job.paidMin %>"
+                                                required> 
+                                            - 
+                                            <input name="paidMax" 
+                                                type="number" 
+                                                placeholder="Đến" 
+                                                value=<%= job.paidMax %> 
+                                                required> VND
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning btn-lg btn-block" type="submit">Chỉnh sửa</button>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 col-12 border border-secondary">
+                    <h5>Thông tin dự án</h5>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <p>Ngày đăng</p>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p><%= job.createDate.toDateString() %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <p>Hạn chót</p>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p><%= job.expiration.toDateString() %></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <p>Ngân sách</p>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p><%= job.paidMin %>  đ - <%= job.paidMax %>  đ</p>
+                        </div>
+                    </div>
+                    <br>
+                    <h5>Thông tin khách hàng</h5>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-4">
+                            <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 100px;height: 100px;">
+                        </div>
+                        <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
+                            <p><%= job.recruiterName %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row border bg pt-4 pb-5 mb-4">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
+                    <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
+                </div>
+                <div class="col-lg-5 col-md-9 col-sm-8 col-12">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-7">
+                            <h5>Trương Văn B</h5>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
+                                Deal
+                            </button>
+                        </div>
+                        <div class="modal fade" id="DealJob">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title">Thỏa thuận</h1>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <div class="col-md-10 offset-md-2">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <p>Tên nhà tuyển dụng</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                    <p><%= job.recruiterName %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <p>Tên Freelancer</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                    <p>Trương Văn B</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <p>Ngày đăng</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                    <p>29/11/2020</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <p>Ngày deal</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                    <p>3/12/2020</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                    <p>Ngân sách</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                    <p>100.000.000đ - 200.000.000đ</p>
+                                                </div>
+                                            </div>
+                                            <div class="login-check">
+                                                <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <p>Web Developer</p>
+                    <p>Kỹ năng: <a href="#">IOS</a>, <a href="#">ANDROID</a>
+                    </p>
                 </div>
-                <p>Web Developer</p>
-                <p>Kỹ năng: <a href="#">IOS</a>, <a href="#">ANDROID</a>
-                </p>
-            </div>
-            <div class="col-lg-5 col-md-12">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Đến từ</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Cao bằng</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Ngày gia nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>31/12/2019</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Việc đã làm</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 việc</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Thu nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 VNĐ</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row border bg pt-4 pb-5 mb-4">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
-                <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
-            </div>
-            <div class="col-lg-5 col-md-9 col-sm-8 col-12">
-                <div class="row">
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                        <h5>Trương Văn B</h5>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                            Deal
-                        </button>
-                    </div>
-                    <div class="modal fade" id="DealJob">
-                        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title">Thỏa thuận</h1>
-                                </div>
-                                <div class="modal-body row">
-                                    <div class="col-md-10 offset-md-2">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>ID dự án</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>12345</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên nhà tuyển dụng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Nguyễn Văn A</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên Freelancer</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trương Văn B</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày đăng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>29/11/2020</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày deal</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>3/12/2020</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngân sách</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>100.000.000đ - 200.000.000đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức làm việc</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Làm online</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức trả lương</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trả theo dự án</p>
-                                            </div>
-                                        </div>
-                                        <div class="login-check">
-                                            <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
-                                </div>
-                            </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <b>Đến từ</b>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p>Cao bằng</p>
                         </div>
                     </div>
-                </div>
-                <p>Web Developer</p>
-                <p>Kỹ năng: <a href="#">IOS</a>, <a href="#">ANDROID</a>
-                </p>
-            </div>
-            <div class="col-lg-5 col-md-12">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Đến từ</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Cao bằng</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Ngày gia nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>31/12/2019</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Việc đã làm</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 việc</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Thu nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 VNĐ</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row border bg pt-4 pb-5 mb-4">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
-                <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
-            </div>
-            <div class="col-lg-5 col-md-9 col-sm-8 col-12">
-                <div class="row">
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                        <h5>Trương Văn B</h5>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                            Deal
-                        </button>
-                    </div>
-                    <div class="modal fade" id="DealJob">
-                        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title">Thỏa thuận</h1>
-                                </div>
-                                <div class="modal-body row">
-                                    <div class="col-md-10 offset-md-2">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>ID dự án</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>12345</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên nhà tuyển dụng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Nguyễn Văn A</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Tên Freelancer</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trương Văn B</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày đăng</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>29/11/2020</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngày deal</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>3/12/2020</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Ngân sách</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>100.000.000đ - 200.000.000đ</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức làm việc</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Làm online</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                <p>Hình thức trả lương</p>
-                                            </div>
-                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                <p>Trả theo dự án</p>
-                                            </div>
-                                        </div>
-                                        <div class="login-check">
-                                            <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <b>Ngày gia nhập</b>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p>31/12/2019</p>
                         </div>
                     </div>
-                </div>
-                <p>Web Developer</p>
-                <p>Kỹ năng: <a href="#">IOS</a>, <a href="#">ANDROID</a>
-                </p>
-            </div>
-            <div class="col-lg-5 col-md-12">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Đến từ</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>Cao bằng</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Ngày gia nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>31/12/2019</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Việc đã làm</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 việc</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                        <b>Thu nhập</b>
-                    </div>
-                    <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                        <p>0 VNĐ</p>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                            <b>Việc đã làm</b>
+                        </div>
+                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                            <p>0 việc</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,8 +16,7 @@ router.get('/:id', async (req, res) => {
     const user = await userService.getUserById(req.params.id);
 
     if (req.isAuthenticated()) {
-        console.log(user)
-        res.render('profile', { role: "own", username: req.user.name, user })
+        res.render('profile', { role: "own", username: req.user.name, id: req.user._id, user })
     } else {
         console.log(user)
         res.render('profile', { role: "guest", user })

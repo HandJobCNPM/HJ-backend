@@ -17,24 +17,28 @@
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Sort</button>
             </nav>
             <article class="job-list">
-                <section>
-                    <header class="flex f-space-between">
-                        <h3 class="title text-left">Mình cần gấp chiều 22/10 chỉnh sửa ảnh CMND bị mờ</h3>
-                        <div class="price text-right">0 đ - 5.000.000 đ</div>
-                    </header>
-                    <main>
-                        <p class="text-left summary">khôi phục hình ảnh bị mờ biết photoshop ảnh bị lóa do chụp sáng sửa lóa sửa quê quán quốc tịch cần gấp
-                            trong 16h làm ngay hôm nay chuyển khoản ngay hôm nay làm 2 ảnh mặt trước và mặt sau tài...</p>
-                    </main>
-                    <footer class="flex f-space-between">
-                        <div class="flex">
-                            <div class="badge badge-warning">Experience</div>
-                            <div class="badge badge-warning">Skill</div>
-                            <div class="badge badge-warning">Tech</div>
-                        </div>
-                        <div class="deadline">Hạn nhận hồ sơ: 23 giờ 18 phút</div>
-                    </footer>
-                </section>
+                <% jobs.forEach(job => { %>
+                    <a class="job-link" href="<%= `/job/${job._id}` %>" >
+                        <section class="job-card" job-id="<%= job._id %>" >
+                            <header class="flex f-space-between">
+                                <h3 class="title text-left"><%= job.title %></h3>
+                                <div class="price text-right"><%= job.paidMin %> đ - <%= job.paidMax %> đ</div>
+                            </header>
+                            <main>
+                                <p class="text-left summary"><%= job.description %></p>
+                            </main>
+                            <footer class="flex f-space-between">
+                                <div class="flex">
+                                    <% job.tags.forEach(tag => { %>
+                                        <div class="badge badge-warning"><%= tag %></div>
+                                    <% }) %>
+                                </div>
+                                <div class="deadline">Hạn nhận hồ sơ: <%= job.expiration.toDateString() %></div>
+                            </footer>
+                        </section>
+                    </a>
+                    
+                <% }) %>
             </article>
         </div>
     </main>

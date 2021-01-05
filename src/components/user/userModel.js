@@ -28,10 +28,6 @@ let userSchema = new mongoose.Schema({
         required: true,
         select: false
     },
-    photoPath: {
-        type: String,
-        default: ''
-    },
     address: {
         type: String,
         default: ""

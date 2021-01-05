@@ -157,8 +157,6 @@ p {
 
 .job-list {
     margin-top: 15px;
-    border-top: 1px solid grey;
-    padding-top: 15px;
 }
 
 .price {
@@ -172,7 +170,7 @@ p {
 }
 
 .deadline {
-    width: 240px;
+    width: 280px;
 }
 
 .badge {
@@ -218,14 +216,14 @@ button:disabled:hover {
     margin-left: 20px;
 }
 
-.profile {
+.profile, .job-detail {
     min-height: calc(100vh - 56px);
     height: 100%;
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-.profile-box {
+.profile-box, .job-detail-box {
     width: 100%;
     background-color: white;
 }
@@ -297,4 +295,36 @@ button:disabled:hover {
 #profile-phone-hide{
   display:none;
   white-space:pre;
+}
+
+.job-link {
+    color: initial !important;
+}
+
+.job-link:hover {
+    text-decoration: none !important;
+    color: initial !important;
+}
+
+.job-card {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid grey;
+    cursor: pointer;
+}
+
+.job-detail-content {
+    padding: 40px 15px 40px 0px;
+}
+
+.job-skill {
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.job-detail-title {
+    font-weight: bold;
+    font-size: 30px;
+    padding-bottom: 20px;
 }

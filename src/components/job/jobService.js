@@ -7,18 +7,19 @@ module.exports = {
     },
 
     getJobById: id => {
-        const job = Job.findOne({_id: id});
+        const job = Job.findOne({ _id: id });
         return job ? job : null;
     },
 
-    createJob: async (recruiterId, title, description, expiration, tags, paidMin, paidMax) => {
+    createJob: async (recruiterId, recruiterName, title, description, expiration, tags, paidMin, paidMax) => {
         const job = await Job.create({
             recruiterId,
+            recruiterName,
             title,
             description,
             createDate: Date(),
             expiration,
-            tags,
+            tags: tags.split(','),
             paidMin,
             paidMax
         });
@@ -26,13 +27,15 @@ module.exports = {
     },
 
     editJob: (id, title, description, expiration, tags, paidMin, paidMax) => {
-        Job.updateOne({_id: id}, {
+        Job.updateOne({ _id: id }, {
             title,
             description,
             expiration,
-            tags,
+            tags: tags.split(','),
             paidMin,
             paidMax
+        }, (err, docs) => {
+            if (err) console.log(err)
         });
         return true;
     },
@@ -40,5 +43,13 @@ module.exports = {
     deleteJob: jobId => {
         Job.deleteOne({ _id: jobId });
         return true;
+    },
+
+    appendComment: (jobId, freelancerId, freelancerName, bid, applyReason) => {
+        const comment = { jobId, freelancerId, freelancerName, bid, applyReason }
+
+        Job.updateOne({ _id: jobId }, { $push: { comments: comment } }, (err, docs) => {
+            if (err) console.log(err)
+        })
     }
 };
