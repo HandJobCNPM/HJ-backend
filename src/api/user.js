@@ -6,9 +6,9 @@ const userService = require('../components/user/userService');
 
 router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect('/user/' + req.user._id)
+        res.redirect('/user/' + req.user._id);
     } else {
-        res.render('404')
+        res.render('404');
     }
 });
 
@@ -17,9 +17,9 @@ router.get('/:id', async (req, res) => {
     const user = await userService.getUserById(req.params.id);
 
     if (req.isAuthenticated()) {
-        res.render('profile', { role: "own", user })
+        res.render('profile', { role: 'own', user });
     } else {
-        res.render('profile', { role: "guest", user })
+        res.render('profile', { role: 'guest', user });
     }
 });
 

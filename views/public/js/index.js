@@ -2,13 +2,13 @@ $('#show-profile').click(function () {
     if ($('#show-profile-panel').attr('show') == "false") {
         $('#show-profile-panel').attr('show', 'true')
     }
-})
+});
 
 $('#show-profile-panel').click(function (e) {
     if (e.target === e.currentTarget) {
         $('#show-profile-panel').attr('show', 'false')
     }
-})
+});
 
 $('#recruiter').click(function () {
     if ($('#personal-info').attr('show') === "true") {

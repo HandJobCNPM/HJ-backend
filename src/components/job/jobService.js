@@ -11,24 +11,28 @@ module.exports = {
         return job ? job : null;
     },
 
-    createJob: async (recruiterId, title, description, expiration, tags) => {
+    createJob: async (recruiterId, title, description, expiration, tags, paidMin, paidMax) => {
         const job = await Job.create({
             recruiterId,
             title,
             description,
             createDate: Date(),
             expiration,
-            tags
+            tags,
+            paidMin,
+            paidMax
         });
         return job ? job : null;
     },
 
-    editJob: (id, title, description, expiration, tags) => {
+    editJob: (id, title, description, expiration, tags, paidMin, paidMax) => {
         Job.updateOne({_id: id}, {
             title,
             description,
             expiration,
-            tags
+            tags,
+            paidMin,
+            paidMax
         });
         return true;
     },

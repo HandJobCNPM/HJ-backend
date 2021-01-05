@@ -67,7 +67,7 @@ app.use(function (req, res, next) {
 
 app.use('/', auth);
 app.use('/job', job);
-app.use('/user', user)
+app.use('/user', user);
 
 mongoose
     .connect(_env.DEV_DB, {
