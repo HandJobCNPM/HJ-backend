@@ -1,32 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../middleware/auth/authenticate');
+const passport = require('passport');
+const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
 const service = require('../components/auth/authService');
 
-router.get('/logout', authenticate, (req, res) => {
-    res.clearCookie('token');
+router.get('/', isLoggedIn, (req, res) => {
+    res.redirect('/job');
+});
+
+router.get('/logout', isLoggedIn, (req, res) => {
+    req.logOut();
     res.redirect('/');
 });
 
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    const resData = await service.login(email, password);
-    if (!resData.hasOwnProperty('_error')) {
-        res.cookie('token', resData['_token']).sendStatus(200);
-        return;
+router.get('/login', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/job');
+    } else {
+        res.render('form', { form: 'login' });
     }
-    res.status(401).json(resData);
+});
+
+router.get('/signup', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/job');
+    } else {
+        res.render('form', { form: 'signup' });
+    }
+
+});
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            return next(err); // will generate a 500 error
+        }
+
+        if (info) {
+            req.flash('error', { title: 'all', message: info.message, email: '', password: '' });
+            res.redirect('/login');
+        } else {
+            req.login(user, error => {
+                if (error) {
+                    return next(error);
+                }
+
+                res.redirect('/job');
+            });
+        }
+
+
+    })(req, res, next);
 });
 
 router.post('/signup', async (req, res) => {
-    const { name, email, password, confirmPassword} = req.body;
-    const resData = await service.signup(name, email, password, confirmPassword);
-    if (!resData.hasOwnProperty('_error')) {
-        console.log(resData);
-        res.status(200).json(resData);
-        return;
+    const { name, email, password, confirmPassword } = req.body;
+
+    let signup = await service.signup(name, email, password, confirmPassword);
+
+    if (typeof signup === 'boolean') {
+        res.redirect('/login');
+    } else {
+        req.flash('error', signup);
+        res.redirect('/signup');
     }
-    res.status(400).json(resData);
 });
 
 module.exports = router;

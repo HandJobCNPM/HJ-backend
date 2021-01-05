@@ -1,15 +1,60 @@
-// const express = require('express');
-// const router = express.Router();
-// const authenticate = require('../middleware/auth/authenticate');
-// const service = require('../components/user/userService');
+const express = require('express');
+const router = express.Router();
+const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
+const { isCurUser } = require('../middleware/auth/verifyUser');
+const userService = require('../components/user/userService');
 
-// router.get('/user/:id', authenticate, async (req, res) => {
-//     const resData = await service.getUser(req.params.id);
-//     if (!resData.hasOwnProperty('_error')) {
-//         res.status(200).json(resData);
-//         return;
-//     }
-//     res.status(404).json(resData);
-// });
+router.get('/', async (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/user/' + req.user._id)
+    } else {
+        res.render('404')
+    }
+});
 
-// module.exports = router;
+router.get('/:id', async (req, res) => {
+    const user = await userService.getUserById(req.params.id);
+
+    if (req.isAuthenticated()) {
+        res.render('profile', { role: "own", username: req.user.name, id: req.user._id, user })
+    } else {
+        console.log(user)
+        res.render('profile', { role: "guest", user })
+    }
+});
+
+router.put('/:id', [isLoggedIn, isCurUser], async (req, res) => {
+    const {
+        name,
+        phone,
+        email,
+        address
+    } = req.body;
+    await userService.editUser(
+        req.params.id,
+        name,
+        phone,
+        email,
+        address
+    );
+    res.redirect('/user')
+});
+
+router.put('/recruiter/:id', [isLoggedIn, isCurUser], async (req, res) => {
+    const { bio } = req.body;
+    const user = await userService.editRecruiter(req.params.id, bio);
+    res.json(user);
+});
+
+router.put('/freelancer/:id', [isLoggedIn, isCurUser], async (req, res) => {
+    const { bio, skills, rating } = req.body;
+    const user = await userService.editFreelancer(req.params.id, bio, skills, rating);
+    res.json(user);
+});
+
+router.delete('/:id', [isLoggedIn, isCurUser], async (req, res) => {
+    const userDeleted = await userService.deleteUser(req.params.id);
+    res.json(userDeleted);
+});
+
+module.exports = router;

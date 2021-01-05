@@ -18,9 +18,9 @@ require('dotenv/config');
 const passport = require('passport');
 require('./config/passport')(passport);
 
-const auth = require('./components/auth/auth');
-const job = require('./components/job/job');
-const user = require('./components/user/user')
+const auth = require('./controllers/auth');
+const job = require('./controllers/job');
+const user = require('./controllers/user')
 
 const _env = process.env;
 const app = express();

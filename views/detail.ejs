@@ -20,73 +20,75 @@
                             <div class="badge badge-warning"><%= tag %></div>
                         <% }) %>
                     </div>
-                    <button data-toggle="modal" data-target="#EditJob">Chỉnh sửa công việc</button>
-                    <div class="modal fade " id="EditJob">
-                        <form action="/job/<%= job._id %>?_method=PUT" method="POST">
-                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title">Đăng việc</h1>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="modal-fill">
-                                            <p>Tên công việc</p>
-                                            <input name="title" type="text" 
-                                                placeholder="VD: Thiết kế web bán hàng đa cấp"
-                                                value="<%= job.title %>"
-                                                required>    
+                    <% if (role === "own") { %>
+                        <button data-toggle="modal" data-target="#EditJob">Chỉnh sửa công việc</button>
+                        <div class="modal fade " id="EditJob">
+                            <form action="/job/<%= job._id %>?_method=PUT" method="POST">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title">Đăng việc</h1>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-
-                                        <div class="modal-fill">
-                                            <p>Chi tiết công việc</p>
-                                            <textarea name="description" 
-                                                type="text"
-                                                placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required rows="5" cols="90">
-                                                <%= job.description %>
-                                            </textarea>
+                                        <div class="modal-body">
+                                            <div class="modal-fill">
+                                                <p>Tên công việc</p>
+                                                <input name="title" type="text" 
+                                                    placeholder="VD: Thiết kế web bán hàng đa cấp"
+                                                    value="<%= job.title %>"
+                                                    required>    
+                                            </div>
+    
+                                            <div class="modal-fill">
+                                                <p>Chi tiết công việc</p>
+                                                <textarea name="description" 
+                                                    type="text"
+                                                    placeholder="VD: Các giao diện cần thiết như trang chủ, xem hàng, thanh toán,..." required rows="5" cols="90">
+                                                    <%= job.description %>
+                                                </textarea>
+                                            </div>
+                                            
+                                            <div class="modal-fill">
+                                                <p>Yêu cầu kỹ năng, framework, ...</p>
+                                                <input name="tags" 
+                                                    type="text" 
+                                                    value="<%= job.tags.join(',') %>"
+                                                    placeholder="VD: HTML,CSS,JS,..." required>
+                                            </div>
+                                            
+                                            <div class="modal-fill">
+                                                <p>Hạn nhận chào giá</p>
+                                                <input name="expiration" 
+                                                    type="date" 
+                                                    value="<%= job.expiration %>"
+                                                    required>
+                                            </div>
+                                            
+                                            <div class="modal-fill">
+                                                <p>Tiền trả công việc</p>
+                                                <input name="paidMin" 
+                                                    type="number" 
+                                                    placeholder="Từ" 
+                                                    value="<%= job.paidMin %>"
+                                                    required> 
+                                                - 
+                                                <input name="paidMax" 
+                                                    type="number" 
+                                                    placeholder="Đến" 
+                                                    value=<%= job.paidMax %> 
+                                                    required> VND
+                                            </div>
                                         </div>
-                                        
-                                        <div class="modal-fill">
-                                            <p>Yêu cầu kỹ năng, framework, ...</p>
-                                            <input name="tags" 
-                                                type="text" 
-                                                value="<%= job.tags.join(',') %>"
-                                                placeholder="VD: HTML,CSS,JS,..." required>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Chỉnh sửa</button>
                                         </div>
-                                        
-                                        <div class="modal-fill">
-                                            <p>Hạn nhận chào giá</p>
-                                            <input name="expiration" 
-                                                type="date" 
-                                                value="<%= job.expiration %>"
-                                                required>
-                                        </div>
-                                        
-                                        <div class="modal-fill">
-                                            <p>Tiền trả công việc</p>
-                                            <input name="paidMin" 
-                                                type="number" 
-                                                placeholder="Từ" 
-                                                value="<%= job.paidMin %>"
-                                                required> 
-                                            - 
-                                            <input name="paidMax" 
-                                                type="number" 
-                                                placeholder="Đến" 
-                                                value=<%= job.paidMax %> 
-                                                required> VND
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-warning btn-lg btn-block" type="submit">Chỉnh sửa</button>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
                 <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 col-12 border border-secondary">
                     <h5>Thông tin dự án</h5>
@@ -126,111 +128,78 @@
                     </div>
                 </div>
             </div>
-            <div class="row border bg pt-4 pb-5 mb-4">
-                <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
-                    <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
-                </div>
-                <div class="col-lg-5 col-md-9 col-sm-8 col-12">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                            <h5>Trương Văn B</h5>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                                Deal
-                            </button>
-                        </div>
-                        <div class="modal fade" id="DealJob">
-                            <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title">Thỏa thuận</h1>
-                                    </div>
-                                    <div class="modal-body row">
-                                        <div class="col-md-10 offset-md-2">
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                    <p>Tên nhà tuyển dụng</p>
+            <% job.comments.forEach(comment => { %>
+                <div class="row border bg pt-4 pb-5 mb-4">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
+                        <a href="/user/<%= comment.freelancerId %>">
+                            <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
+                        </a>
+                    </div>
+                    <div class="col-lg-5 col-md-9 col-sm-8 col-12">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-7">
+                                <h5><%= comment.freelancerName %></h5>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
+                                    Deal
+                                </button>
+                            </div>
+                            <div class="modal fade" id="DealJob">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title">Thỏa thuận</h1>
+                                        </div>
+                                        <div class="modal-body row">
+                                            <div class="col-md-10 offset-md-2">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                        <p>Tên nhà tuyển dụng</p>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                        <p><%= job.recruiterName %></p>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                    <p><%= job.recruiterName %></p>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                        <p>Tên Freelancer</p>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                        <p><%= comment.freelancerName %></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                    <p>Tên Freelancer</p>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                        <p>Ngày deal</p>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                        <p>3/12/2020</p>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                    <p>Trương Văn B</p>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                        <p>Gía thoả thuân</p>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                        <p><%= comment.bid %> đ</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                    <p>Ngày đăng</p>
+                                                <div class="login-check">
+                                                    <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
                                                 </div>
-                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                    <p>29/11/2020</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                    <p>Ngày deal</p>
-                                                </div>
-                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                    <p>3/12/2020</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                    <p>Ngân sách</p>
-                                                </div>
-                                                <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                    <p>100.000.000đ - 200.000.000đ</p>
-                                                </div>
-                                            </div>
-                                            <div class="login-check">
-                                                <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p>Web Developer</p>
-                    <p>Kỹ năng: <a href="#">IOS</a>, <a href="#">ANDROID</a>
-                    </p>
                 </div>
-                <div class="col-lg-5 col-md-12">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                            <b>Đến từ</b>
-                        </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                            <p>Cao bằng</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                            <b>Ngày gia nhập</b>
-                        </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                            <p>31/12/2019</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                            <b>Việc đã làm</b>
-                        </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
-                            <p>0 việc</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <% }) %>
         </div>
     </div>
 
