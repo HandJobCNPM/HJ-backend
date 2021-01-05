@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 let CandidateObj = {
+    jobId: {
+        type: String,
+        required: true
+    },
     freelancerPhotoUrl: {
         type: String,
         required: true
