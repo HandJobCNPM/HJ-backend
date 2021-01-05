@@ -71,8 +71,8 @@ p {
     display: none;
 }
 
-[show="true"] {
-    display: block;
+#show-profile {
+    cursor: pointer;
 }
 
 #show-profile-panel {
@@ -220,12 +220,81 @@ button:disabled:hover {
 
 .profile {
     min-height: calc(100vh - 56px);
+    height: 100%;
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
 .profile-box {
     width: 100%;
-    height: 100%;
     background-color: white;
+}
+
+.profile-row {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.profile-row input {
+    border: none;
+    min-width: 200px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-row input:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+}
+
+.profile-row input:disabled {
+    background-color: white;
+    color: black;
+}
+
+.profile-achievement {
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+
+.achievement {
+    height: 40px;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border: 4px solid black;
+    border-radius: 50%;
+}
+
+#profile-name {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.profile-tab {
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#profile-name-hide {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#profile-email-hide, 
+#profile-name-hide, 
+#profile-address-hide, 
+#profile-phone-hide{
+  display:none;
+  white-space:pre;
 }

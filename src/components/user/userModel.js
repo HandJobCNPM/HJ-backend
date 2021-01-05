@@ -29,19 +29,26 @@ let userSchema = new mongoose.Schema({
         select: false
     },
     photoPath: {
-        type: String, default: ''
+        type: String,
+        default: ''
     },
     address: {
         type: String,
         default: ''
     },
     recruiterMode: {
-        bio: String,
+        bio: {
+            type: String,
+            default: ""
+        },
         achievements: [ContractObj],
         postedJobs: [JobObj]
     },
     freelancerMode: {
-        bio: String,
+        bio: {
+            type: String,
+            default: ""
+        },
         skills: [String],
         ratingCount: Number,
         rating: {

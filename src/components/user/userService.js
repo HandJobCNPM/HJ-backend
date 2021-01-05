@@ -59,7 +59,7 @@ module.exports = {
             recruiter: { 'recruiterMode.postedJobs': job },
             freelancer: { 'freelancerMode.appliedJobs': job },
         };
-        const user = await User.findByIdAndUpdate({_id: userId}, {
+        const user = await User.findByIdAndUpdate({ _id: userId }, {
             $push: query[userMode]
         });
 
@@ -91,7 +91,7 @@ module.exports = {
             return errors;
         }
         const user = await User.findByIdAndUpdate({ _id: userId }, {
-            name, phone, password, photoPath, address
+            name, phone, email, address
         });
         if (!user) {
             errors.push('Error occured cause user is null.');
@@ -210,7 +210,7 @@ module.exports = {
             recruiter: { 'recruiterMode.postedJobs': { jobId: jobId } },
             freelancer: { 'freelancerMode.appliedJobs': { jobId: jobId } },
         };
-        const user = await User.findByIdAndUpdate({_id: userId}, {
+        const user = await User.findByIdAndUpdate({ _id: userId }, {
             $pull: query[userMode]
         });
         if (!user) {

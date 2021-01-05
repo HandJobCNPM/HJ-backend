@@ -1,39 +1,56 @@
 <main class="h-100vh flex f-center fv-center">
     <form class="form flex f-column f-center" action="/signup" method="POST">
-       
-
         <h2 class="form-title text-light">Tạo tài khoản</h2>
         <div class="form-fill">
             <p>Họ và tên</p>
             <input type="text"
                     placeholder="Nguyễn Vắn A"
                     name="name"
-                    id="signup-name">
-            <p id="signup-name-error" class="invalid-message"></p>
+                    id="signup-name"
+                    fill="<%- error.length > 0 ? (error[0].title == "name" ? "invalid" : "") : "" %>"
+                    value="<%- error.length > 0 ? error[0].name : "" %>"
+                    >
+            <p id="signup-name-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "name" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <div class="form-fill">
             <p>Email</p>
             <input type="text"
                     placeholder="yourmail@mail.com"
                     name="email"
-                    id="signup-email">
-            <p id="signup-email-error" class="invalid-message"></p>
+                    id="signup-email" 
+                    fill="<%- error.length > 0 ? (error[0].title == "email" ? "invalid" : "") : "" %>"
+                    value="<%- error.length > 0 ? error[0].email : "" %>"
+                    >
+            <p id="signup-email-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "email" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <div class="form-fill">
             <p>Mật khẩu</p>
             <input type="password"
                     placeholder="Mật khẩu"
                     name="password"
-                    id="signup-password">
-            <p id="signup-password-error" class="invalid-message"></p>
+                    id="signup-password"
+                    fill="<%- error.length > 0 ? (error[0].title == "password" ? "invalid" : "") : "" %>"
+                    value="<%- error.length > 0 ? error[0].password : "" %>"
+                    >
+            <p id="signup-password-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "password" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <div class="form-fill">
             <p>Xác nhận mật khẩu</p>
             <input type="password"
                     placeholder="Mật khẩu"
                     name="confirmPassword"
-                    id="signup-password-confirm">
-            <p id="signup-confirm-password-error" class="invalid-message"></p>
+                    id="signup-password-confirm"
+                    fill="<%- error.length > 0 ? (error[0].title == "confirmPassword" ? "invalid" : "") : "" %>"
+                    >
+            <p id="signup-confirm-password-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "confirmPassword" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <button class="form-submit" id="signup" type="submit" disabled>Đăng ký</button>
     </form>

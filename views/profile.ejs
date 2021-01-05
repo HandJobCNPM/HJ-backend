@@ -5,32 +5,99 @@
 <body>
     <%- include('./partials/header.ejs') %>
 
-    <div class="container profile flex f-center fv-center">
+    <div class="container profile flex f-center">
         <div class="profile-box container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 mt-3">
-                    <img src="/img/logoPerson.jpg" alt="Ảnh đại diện" style="width: 200px;height: 200px;">
-                    <p>Online cuối: 25/10/2020 </p>
+            <div class="profile-tabs flex">
+                <div class="profile-tab" id="personal">Thông tin cá nhân</div>
+                <div class="profile-tab" id="recruiter">Vị trí nhà tuyển dụng</div>
+                <div class="profile-tab" id="freelancer">Vị trí freelancer</div>
+            </div>
+            <form action="/user/<%= user._id %>?_method=PUT" method="POST" class="row profile-row" id="personal-info" show="true">
+                <div class="col-lg-3 col-md-4">
+                    <img src="<%- user.photoPath !== '' ? user.photoPath : "/img/user.svg" %>" alt="Ảnh đại diện" class="avatar">
                 </div>
-                <div class="col-lg-4 col-md-4 mt-3">
-                    <p><%= user.name %> 
-                        <button>Cập nhật thông tin</button>
-                    </p>
-                    <p>Toàn quốc</p>
-                    <p>Freelancer đang cập nhật kỹ năng</p>
-                </div>
-                <div class="col-lg-4 offset-lg-1 col-md-4 border border-secondary mt-3">
-                    <h4 class="text-center pt-2">Thông tin liên lạc</h4>
-                    <div class="mt-4">
-                        <img src="/img/lgEmail.jpg" alt="logoEmail" style="width: 30px;height: 30px;"> <%= user.email %> 
-                        <br>
-                        <img src="/img/lgPhone.jpg" alt="logoPhone" style="width: 30px;height: 30px;"> <%= user.phone %> 
+                <div class="col-lg-5 col-md-4">
+                    <div>
+                        <span id="profile-name-hide"></span>
+                        <input type="text" 
+                            value="<%= user.name %>"
+                            name="name"   
+                            id="profile-name" 
+                            <% if (role === "own") { %>
+                                placeholder="Add name" 
+                            <% } else { %>
+                                disabled="disabled"
+                            <% } %>
+                            >   
+                    </div>
+                    <div>
+                        <span id="profile-address-hide"></span>
+                        <input type="text" 
+                            value="<%= user.address %>" 
+                            id="profile-address" 
+                            name="address"
+                            <% if (role === "own") { %>
+                                placeholder="Add address"
+                            <% } else { %>
+                                disabled="disabled"
+                            <% } %>
+                            >
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-4 border border-secondary contact-info">
+                    <h4 class="text-center">Thông tin liên lạc</h4>
+                    <div class="">
+                        <div class="contact-item">
+                            <img src="/img/email.svg" alt="logoEmail" style="width: 30px;height: 30px;"> 
+                            <span id="profile-email-hide"></span>
+                            <input type="text" 
+                                value="<%= user.email %>" 
+                                id="profile-email" 
+                                class="contact-info-item" 
+                                name="email"
+                                <% if (role === "own") { %>
+                                    placeholder="Add mail"
+                                <% } else { %>
+                                    disabled="disabled"
+                                <% } %>
+                                >
+                        </div>
+                        <div class="contact-item">
+                            <img src="/img/phone.svg" alt="logoPhone" style="width: 30px;height: 30px;">  
+                            <span id="profile-phone-hide"></span>
+                            <input type="text" 
+                                value="<%= user.phone %>" 
+                                id="profile-phone" 
+                                class="contact-info-item" 
+                                name="phone"
+                                <% if (role === "own") { %>
+                                    placeholder="Add phone"
+                                <% } else { %>
+                                    disabled="disabled"
+                                <% } %>
+                                >
+                        </div>                        
+                    </div>
+                </div>
+                <button show="false" id="edit" type="submit" disabled="disabled">Sửa</button>
+            </form>
+            <div class="profile-achievement" id="recruiter-info" show="false">
+                <h3>Vị trí nhà tuyển dụng</h3>
+                <p><%= user.recruiterMode.bio %></p>
+                <% user.recruiterMode.achievements.forEach(achivement => { %>
+                    <div class="achievement">
+                        <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
+                    </div>
+                <% }) %>
             </div>
-            <div class="CV mt-5">
-                <h4>Hồ sơ năng lực</h4>
-                <p>Hiện tại chưa có hồ sơ</p>
+            <div class="profile-achievement" id="freelancer-info" show="false">
+                <h3>Vị trí freelancer</h3>
+                <p><%= user.freelancerMode.bio %></p>
+                <% user.freelancerMode.achievements.forEach(achivement => { %>
+                    <div class="achievement">
+                        <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </div>
