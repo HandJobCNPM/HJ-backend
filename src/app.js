@@ -6,7 +6,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
-
+const compression = require('compression')
+const methodOverride = require('method-override')
 
 // Security
 const helmet = require('helmet');
@@ -17,9 +18,9 @@ require('dotenv/config');
 const passport = require('passport');
 require('./config/passport')(passport);
 
-const auth = require('./api/auth');
-const job = require('./api/job');
-const user = require('./api/user')
+const auth = require('./components/auth/auth');
+const job = require('./components/job/job');
+const user = require('./components/user/user')
 
 const _env = process.env;
 const app = express();
@@ -28,6 +29,7 @@ const app = express();
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
+app.use(methodOverride('_method'))
 
 app.use(helmet());
 app.use(cors());
@@ -35,6 +37,7 @@ app.use(cors());
 // Log request and response
 app.use(morgan('dev'));
 
+app.use(compression())
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({

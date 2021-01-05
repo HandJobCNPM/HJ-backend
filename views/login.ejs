@@ -7,16 +7,26 @@
             <input type="email"
                     placeholder="yourmail@mail.com"
                     name="email"
-                    id="login-email">
-            <p id="login-email-error" class="invalid-message"></p>
+                    id="login-email"
+                    fill="<%- error.length > 0 ? (error[0].title == "email" || error[0].title == "all" ? "invalid" : "") : "" %>"
+                    value="<%- error.length > 0 ? error[0].email : "" %>"
+                    >
+            <p id="login-email-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "email" || error[0].title == "all" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <div class="form-fill">
             <p>Mật khẩu</p>
             <input type="password"
                     placeholder="Mật khẩu"
                     name="password"
-                    id="login-password">
-            <p id="login-password-error" class="invalid-message"></p>
+                    id="login-password"
+                    fill="<%- error.length > 0 ? (error[0].title == "password" || error[0].title == "all" ? "invalid" : "") : "" %>"
+                    value="<%- error.length > 0 ? error[0].password : "" %>"
+                    >
+            <p id="login-password-error" class="invalid-message">
+                <%- error.length > 0 ? (error[0].title == "password" || error[0].title == "all" ? error[0].message : "") : "" %>
+            </p>
         </div>
         <button class="form-submit" id="login" type="submit" disabled="disabled">Đăng nhập</button>    
     </form>

@@ -11,7 +11,7 @@ module.exports = passport => {
             if (user && hash.isPwdMatched(password, user.password)) {
                 return done(null, user);
             }
-            return done(null, false, { message: 'Incorrect email/password' });
+            return done(null, false, { message: 'Incorrect email or password' });
         }));
 
     passport.serializeUser((user, done) => {

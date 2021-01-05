@@ -1,33 +1,43 @@
 const expressValidator = require('express-validator');
 
 exports.validateLogin = (email, password) => {
-    let errors = [];
-    if (!email || !password) {
-        errors.push({ msg: 'Please fill in all fields.' });
+    let error = {};
+
+    if (!email) {
+        error = { title: "email", message: "Invalid name", email: "", password }
+        return error
     }
-    if (password.length < 6) {
-        errors.push({ msg: 'Password to short.' });
+
+    if (!password || password.length < 8) {
+        error = { title: "password", message: "Invalid password", email, password: "" }
+        return error
     }
-    return (errors.length > 0) ? errors : 'Success';
+
+    return 'Success';
 }
 
 exports.validateSignup = (name, email, password, confirmPassword) => {
-    let errors = [];
+    let error = {};
 
-    // Check required fields
-    if (!name || !email || !password || !confirmPassword) {
-        errors.push({ msg: 'Please fill in all fields.' });
+    if (!name) {
+        error = { title: "name", message: "Invalid name", name: "", email, password }
+        return error
     }
 
-    // Check password length
-    if (password.length < 8) {
-        errors.push({ msg: 'Password to short.' });
+    if (!email) {
+        error = { title: "email", message: "Invalid name", name, email: "", password }
+        return error
     }
 
-    // Check passwords match
-    if (password != confirmPassword) {
-        errors.push({ msg: 'Password do not match.' });
+    if (!password || password.length < 8) {
+        error = { title: "password", message: "Invalid password", name, email, password: "" }
+        return error
     }
 
-    return (errors.length > 0) ? errors : 'Success';
+    if (!confirmPassword || confirmPassword !== password) {
+        error = { title: "confirmPassword", message: "Invalid confirm password", name, email, password: "" }
+        return error
+    }
+
+    return 'Success';
 }
