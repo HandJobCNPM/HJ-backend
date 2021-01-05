@@ -1,6 +1,6 @@
 const User = require('../user/userModel');
 const hash = require('../../services/hash');
-const { validateLogin, validateSignup } = require('./validate')
+const { validateLogin, validateSignup } = require('./validate');
 
 module.exports = {
     signup: async (name, email, password, confirmPassword) => {

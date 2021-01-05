@@ -1,5 +1,3 @@
-const expressValidator = require('express-validator');
-
 exports.validateLogin = (email, password) => {
     let errors = [];
     if (!email || !password) {
@@ -9,7 +7,7 @@ exports.validateLogin = (email, password) => {
         errors.push({ msg: 'Password to short.' });
     }
     return (errors.length > 0) ? errors : 'Success';
-}
+};
 
 exports.validateSignup = (name, email, password, confirmPassword) => {
     let errors = [];
@@ -30,4 +28,4 @@ exports.validateSignup = (name, email, password, confirmPassword) => {
     }
 
     return (errors.length > 0) ? errors : 'Success';
-}
+};

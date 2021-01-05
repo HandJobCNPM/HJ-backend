@@ -17,7 +17,7 @@ let userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        default: ""
+        default: ''
     },
     email: {
         type: String,
@@ -33,7 +33,7 @@ let userSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        default: ""
+        default: ''
     },
     recruiterMode: {
         bio: String,
