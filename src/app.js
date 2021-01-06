@@ -21,6 +21,7 @@ require('./config/passport')(passport);
 const auth = require('./controllers/auth');
 const job = require('./controllers/job');
 const user = require('./controllers/user')
+const contract = require('./controllers/contract')
 
 const _env = process.env;
 const app = express();
@@ -69,6 +70,7 @@ app.use(function (req, res, next) {
 app.use('/', auth);
 app.use('/job', job);
 app.use('/user', user);
+app.use('/contract', contract)
 
 mongoose
     .connect(_env.DEV_DB, {

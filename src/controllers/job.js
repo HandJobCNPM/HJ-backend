@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
         if (ssUserId == job.recruiterId) {
             role = 'author';
         }
-        console.log(ssUserId);
+
         res.render('detail', { cmtAllowed: cmtAllowed, role: role, username: req.user.name, id: ssUserId, job, photoPath: req.user.photoPath });
     } else {
         res.render('detail', { cmtAllowed: cmtAllowed, role: 'guest', job, id: '' });

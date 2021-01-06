@@ -227,7 +227,14 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Accept</button>
+                                            <form action="/contract" method="POST">
+                                                <input type="hidden" name="jobId" value="<%= job._id %>" show="false">
+                                                <input type="hidden" name="title" value="<%= job.title %>" show="false">
+                                                <input type="hidden" name="salary" value="<%= comment.bid %>" show="false">
+                                                <input type="hidden" name="recruiterId" value="<%= job.recruiterId %>" show="false">
+                                                <input type="hidden" name="freelancerId" value="<%= comment.freelancerId %>" show="false">
+                                                <button class="btn btn-warning btn-lg btn-block" type="submit">Accept</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
