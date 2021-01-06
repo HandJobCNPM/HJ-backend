@@ -22,6 +22,9 @@
                     </div>
                     <% if (role === "author") { %>
                         <button data-toggle="modal" data-target="#EditJob">Chỉnh sửa công việc</button>
+                        <form action="/job/<%= job._id %>?_method=DELETE" method="POST">
+                            <button type="submit">Xoa cong viec</button>
+                        </form>
                         <div class="modal fade " id="EditJob">
                             <form action="/job/<%= job._id %>?_method=PUT" method="POST">
                                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
