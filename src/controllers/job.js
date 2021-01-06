@@ -104,7 +104,7 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     const freelancerId = req.user._id;
     const freelancerName = req.user.name;
 
-    const { bid, applyReason } = req.body;
+    const { applyReason, bid } = req.body;
 
     const job = await jobService.getJobById(jobId);
     if (job.recruiterId !== freelancerId) {

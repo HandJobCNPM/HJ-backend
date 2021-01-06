@@ -128,21 +128,43 @@
                     </div>
                 </div>
             </div>
+
+            <form action="comment/<%= job._id %>" method="POST">
+                <div class="jumbotron p-1">
+                <div class="form-group">
+                  <textarea name="applyReason" class="form-control" placeholder="Reasons to apply" required></textarea>
+                </div>
+                <div class="form-row align-items-center">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Bid amount (VND)</label>
+                    <div class="col-sm-2">
+                      <input name="bid" type="number" min="<%= job.paidMin %>" max="<%= job.paidMax %>" class="form-control form-control-sm" id="colFormLabelSm" placeholder="<%= job.paidMax %>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10 text-center">
+                      <button type="submit" class="btn btn-primary">Apply</button>
+                    </div>
+                </div>
+                </div>
+              </form>
+
             <% job.comments.forEach(comment => { %>
                 <div class="row border bg pt-4 pb-5 mb-4">
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-12 text-center">
-                        <a href="/user/<%= comment.freelancerId %>">
-                            <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 150px;height: 150px;">
-                        </a>
-                    </div>
                     <div class="col-lg-5 col-md-9 col-sm-8 col-12">
                         <div class="row">
-                            <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                                <h5><%= comment.freelancerName %></h5>
+                            <div class="col-sm-2 col-md-3 col-sm-4 col-12 text-center">
+                                <a href="/user/<%= comment.freelancerId %>">
+                                    <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 50px;height: 50px;">
+                                </a>
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-7">
+                                    <h5><%= comment.freelancerName %></h5>
+                                </div>
                             </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-5 text-right">
+                            <div class="col-sm-5"><%= comment.applyReason %></div>
+                            <div class="col-sm-3">Bid: <%= comment.bid %></div>
+                            <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
                                 <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                                    Deal
+                                    Accept
                                 </button>
                             </div>
                             <div class="modal fade" id="DealJob">
@@ -191,7 +213,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Deal</button>
+                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Accept</button>
                                         </div>
                                     </div>
                                 </div>
