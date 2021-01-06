@@ -19,9 +19,13 @@ router.get('/:id', async (req, res) => {
     const job = await jobService.getJobById(req.params.id);
 
     if (req.isAuthenticated()) {
-        res.render('detail', { role: "user", username: req.user.name, id: req.user._id, job })
+        let role = 'user';
+        if (req.user._id == job.recruiterId) {
+            role = 'author';
+        }
+        res.render('detail', { role: role, username: req.user.name, id: req.user._id, job });
     } else {
-        res.render('detail', { role: "guest", job })
+        res.render('detail', { role: 'guest', job });
     }
 });
 
@@ -107,12 +111,15 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     const { applyReason, bid } = req.body;
 
     const job = await jobService.getJobById(jobId);
-    if (job.recruiterId !== freelancerId) {
+    if (job.recruiterId != freelancerId) {
         jobService.appendComment(jobId, freelancerId, freelancerName, bid, applyReason);
+
+        // update candidate profile
+        userService.addJob(freelancerId, 'freelancer', jobId, job.title);
     }
 
-    res.redirect(`/job/${jobId}`)
-})
+    res.redirect(`/job/${jobId}`);
+});
 
 router.post('/search', async (req, res) => {
     const { query } = req.body

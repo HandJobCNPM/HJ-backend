@@ -20,7 +20,7 @@
                             <div class="badge badge-warning"><%= tag %></div>
                         <% }) %>
                     </div>
-                    <% if (role === "own") { %>
+                    <% if (role === "author") { %>
                         <button data-toggle="modal" data-target="#EditJob">Chỉnh sửa công việc</button>
                         <div class="modal fade " id="EditJob">
                             <form action="/job/<%= job._id %>?_method=PUT" method="POST">
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-
+            <% if (role === "user") { %>
             <form action="comment/<%= job._id %>" method="POST">
                 <div class="jumbotron p-1">
                 <div class="form-group">
@@ -147,7 +147,7 @@
                 </div>
                 </div>
               </form>
-
+            <% } %>
             <% job.comments.forEach(comment => { %>
                 <div class="row border bg pt-4 pb-5 mb-4">
                     <div class="col-lg-5 col-md-9 col-sm-8 col-12">
