@@ -91,6 +91,14 @@
                         <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
                     </div>
                 <% }) %>
+                <h5>Cong viec da dang</h5>
+                <div>
+                    <% user.recruiterMode.postedJobs.forEach(job => { %>
+                        <div class="achievement">
+                            <a href="/job/<%= job.jobId %>"><%= job.title %></a>
+                        </div>
+                    <% }) %>
+                </div>
             </div>
             <div class="profile-achievement" id="freelancer-info" show="false">
                 <h3>Vị trí freelancer</h3>
@@ -100,6 +108,14 @@
                         <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
                     </div>
                 <% }) %>
+                <h5>Cong viec da chao gia</h5>
+                <div>
+                    <% user.freelancerMode.appliedJobs.forEach(job => { %>
+                        <div class="achievement">
+                            <a href="/job/<%= job.jobId %>"><%= job.title %></a>
+                        </div>
+                    <% }) %>
+                </div>
             </div>
         </div>
     </div>
