@@ -14,11 +14,12 @@ module.exports = {
         return job ? job : null;
     },
 
-    createJob: async (recruiterId, title, description, expiration, tags, paidMin, paidMax) => {
+    createJob: async (recruiterId, recruiterName, title, description, expiration, tags, paidMin, paidMax) => {
         if (!recruiterId || !title || !description || !expiration || !tags || !paidMin || !paidMax) {
             return null;
         }
-        const job = await Job.create({
+
+        const job = new Job({
             recruiterId,
             recruiterName,
             title,
@@ -28,8 +29,21 @@ module.exports = {
             tags: tags.split(','),
             paidMin,
             paidMax
-        });
-        return job ? job : null;
+        })
+
+        job.save((err, doc) => {
+            if (err) console.log(err)
+
+            if (process.env.ENV === "production") {
+                job.on('es-indexed', (err, res) => {
+                    if (err) console.log(err)
+                    console.log('Add job to elasticseach')
+                })
+            }
+
+            return doc
+
+        })
     },
 
     editJob: (id, title, description, expiration, tags, paidMin, paidMax) => {
@@ -85,5 +99,12 @@ module.exports = {
         Job.updateOne({ _id: jobId }, { $push: { comments: comment } }, (err, docs) => {
             if (err) console.log(err)
         })
+    },
+    searchJob: async query => {
+        const results = await Job.fuzzySearch({
+            query
+        })
+
+        return results
     }
 };

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 
 let CandidateObj = {
     jobId: {
@@ -34,11 +35,11 @@ let jobSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
     createDate: {
         type: Date,
@@ -60,5 +61,7 @@ let jobSchema = new mongoose.Schema({
     },
     comments: [CandidateObj]
 });
+
+jobSchema.plugin(mongoose_fuzzy_searching, { fields: ['title'] });
 
 module.exports = Job = mongoose.model('Jobs', jobSchema);

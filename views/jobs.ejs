@@ -11,8 +11,15 @@
         </aside>
         <div class="panel col-md-8 col-12 text-center border border-primary">
             <nav class="flex f-space-between">
-                <form class="form-inline my-2 my-md-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form action='/job/search' id="search-form" method="POST" class="form-inline my-2 my-md-0">
+                    <input class="form-control mr-sm-2" 
+                        name="query" 
+                        id="search" 
+                        type="search" 
+                        placeholder="Search" 
+                        aria-label="Search"
+                        value="<%= query %>"
+                        >
                 </form>
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Sort</button>
             </nav>

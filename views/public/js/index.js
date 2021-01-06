@@ -62,3 +62,10 @@ infos.forEach(info => {
         $('#edit').prop('disabled', false)
     })
 });
+
+$('#search').keypress(function (e) {
+    if (e.which == 13) {
+        $('#search-form').submit()
+        return false;
+    }
+})

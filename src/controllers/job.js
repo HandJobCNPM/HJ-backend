@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
     const jobs = await jobService.getAllJobs();
 
     if (req.isAuthenticated()) {
-        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs })
+        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs, query: "" })
     } else {
-        res.render('jobs', { role: "guest", jobs })
+        res.render('jobs', { role: "guest", jobs, query: "" })
     }
 
 });
@@ -112,6 +112,25 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     }
 
     res.redirect(`/job/${jobId}`)
+})
+
+router.post('/search', async (req, res) => {
+    const { query } = req.body
+    const encodeQuery = encodeURI(query)
+
+    res.redirect('/job/search/' + encodeQuery)
+})
+
+router.get('/search/:id', async (req, res) => {
+    const query = req.params.id
+
+    let results = await jobService.searchJob(query)
+
+    if (req.isAuthenticated()) {
+        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs: results, query })
+    } else {
+        res.render('jobs', { role: "guest", jobs: results, query })
+    }
 })
 
 module.exports = router;
