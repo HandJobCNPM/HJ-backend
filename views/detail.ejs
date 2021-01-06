@@ -222,7 +222,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="login-check">
-                                                    <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
+                                                    <input type="checkbox" id="agree"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
                                                 </div>
                                             </div>
                                         </div>
@@ -233,7 +233,7 @@
                                                 <input type="hidden" name="salary" value="<%= comment.bid %>" show="false">
                                                 <input type="hidden" name="recruiterId" value="<%= job.recruiterId %>" show="false">
                                                 <input type="hidden" name="freelancerId" value="<%= comment.freelancerId %>" show="false">
-                                                <button class="btn btn-warning btn-lg btn-block" type="submit">Accept</button>
+                                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="accept-contract" disabled>Accept</button>
                                             </form>
                                         </div>
                                     </div>

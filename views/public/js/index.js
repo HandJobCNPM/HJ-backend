@@ -81,3 +81,11 @@ $('#upload-image').change(function () {
     }
 })
 
+$('#agree').click(function () {
+    console.log('abc')
+    if ($(this).prop('checked')) {
+        $('#accept-contract').prop('disabled', false)
+    } else {
+        $('#accept-contract').prop('disabled', true)
+    }
+})
