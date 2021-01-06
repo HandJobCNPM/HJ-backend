@@ -87,20 +87,21 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
     const job = await jobService.getJobById(jobId);
     let jobDeleted;
     if (job.recruiterId === userId) {
-        jobDeleted = jobService.deleteJob(jobId);
+        jobDeleted = await jobService.deleteJob(jobId);
 
         if (jobDeleted) {
             // update recruiter profile
             userService.deleteJob(userId, 'recruiter', jobId);
 
             // update candidate profiles
-            for (let candidate of job.comment) {
+            for (let candidate of job.comments) {
                 userService.deleteJob(candidate.freelancerId, 'freelancer', jobId);
             }
         }
     }
 
-    res.json(jobDeleted);
+    res.redirect('/job');
+
 });
 
 router.post('/comment/:id', isLoggedIn, async (req, res) => {

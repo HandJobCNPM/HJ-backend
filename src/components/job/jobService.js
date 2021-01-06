@@ -85,11 +85,11 @@ module.exports = {
         return true;
     },
 
-    deleteJob: jobId => {
+    deleteJob: async jobId => {
         if (!jobId) {
             return false;
         }
-        Job.deleteOne({ _id: jobId });
+        await Job.deleteOne({ _id: jobId });
         return true;
     },
 
