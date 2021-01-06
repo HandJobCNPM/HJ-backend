@@ -122,6 +122,22 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     res.redirect(`/job/${jobId}`);
 });
 
+router.delete('/comment/:id', isLoggedIn, async (req, res) => {
+    const jobId = req.params.id;
+    const job = await jobService.getJobById(jobId);
+    for (const comment of job.comments) {
+        if (comment.freelancerId == req.user._id) {
+            const deletedComment = await jobService.deleteComment(jobId, comment._id);
+            if (deletedComment) {
+                userService.deleteJob(comment.freelancerId, 'freelancer', jobId);
+            }
+            break;
+        }
+    }
+
+    res.redirect(`/job/${jobId}`);
+});
+
 router.post('/search', async (req, res) => {
     const { query } = req.body
     const encodeQuery = encodeURI(query)

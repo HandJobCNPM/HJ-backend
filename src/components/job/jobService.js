@@ -108,7 +108,7 @@ module.exports = {
             return false;
         }
         const job = await Job.findByIdAndUpdate({ _id: jobId}, {
-            $pull: { 'comments': { commentId: commentId } }
+            $pull: { comments: { _id: commentId }}
         });
 
         if (!job) {
