@@ -28,6 +28,10 @@ let userSchema = new mongoose.Schema({
         required: true,
         select: false
     },
+    photoPath: {
+        type: String,
+        default: '/img/user.svg'
+    },
     address: {
         type: String,
         default: ''

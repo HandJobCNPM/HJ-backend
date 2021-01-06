@@ -51,7 +51,7 @@ module.exports = {
         if (!title) {
             errors.push('Error occured cause title is emmpty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const job = { jobId, title };
@@ -87,7 +87,7 @@ module.exports = {
         if (!address) {
             errors.push('Error occured cause address is empty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const user = await User.findByIdAndUpdate({ _id: userId }, {
@@ -114,7 +114,7 @@ module.exports = {
         if (!title) {
             errors.push('Error occured cause title is empty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const contract = { contractId, title };
@@ -140,7 +140,7 @@ module.exports = {
         if (!bio) {
             errors.push('Error occured cause bio is empty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const user = await User.findByIdAndUpdate({ _id: userId }, {
@@ -167,7 +167,7 @@ module.exports = {
         if (!rating) {
             errors.push('Error occured cause rating is empty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const user = await User.findByIdAndUpdate({ _id: userId }, {
@@ -197,13 +197,13 @@ module.exports = {
         if (!userId) {
             errors.push('Error occured cause user id is empty.');
         }
-        if(!userMode) {
+        if (!userMode) {
             errors.push('Error occured cause user mode is empty.');
         }
-        if(!jobId) {
+        if (!jobId) {
             errors.push('Error occured cause jod id is empty.');
         }
-        if (errors.length > 0){
+        if (errors.length > 0) {
             return errors;
         }
         const query = {
@@ -218,5 +218,8 @@ module.exports = {
             return errors;
         }
         return user;
+    },
+    uploadImage: async (_id, photoPath) => {
+        await User.updateOne({ _id }, { photoPath })
     }
 };
