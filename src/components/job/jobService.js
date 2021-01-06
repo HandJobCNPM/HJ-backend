@@ -1,3 +1,4 @@
+const { query } = require('express-validator');
 const Job = require('./jobModel');
 
 module.exports = {
@@ -29,21 +30,22 @@ module.exports = {
             tags: tags.split(','),
             paidMin,
             paidMax
-        })
+        });
 
         job.save((err, doc) => {
-            if (err) console.log(err)
+            if (err) { console.log(err); }
 
-            if (process.env.ENV === "production") {
+            if (process.env.ENV === 'production') {
                 job.on('es-indexed', (err, res) => {
-                    if (err) console.log(err)
-                    console.log('Add job to elasticseach')
-                })
+                    if (err) { console.log(err); }
+                    console.log('Add job to elasticseach');
+                });
             }
 
-            return doc
+            return doc;
+        });
 
-        })
+        return job;
     },
 
     editJob: (id, title, description, expiration, tags, paidMin, paidMax) => {
@@ -100,6 +102,21 @@ module.exports = {
             if (err) console.log(err)
         })
     },
+
+    deleteComment: async (jobId, commentId) => {
+        if (!jobId || !commentId) {
+            return false;
+        }
+        const job = await Job.findByIdAndUpdate({ _id: jobId}, {
+            $pull: { 'comments': { commentId: commentId } }
+        });
+
+        if (!job) {
+            return false;
+        }
+        return true;
+    },
+
     searchJob: async query => {
         const results = await Job.fuzzySearch({
             query
