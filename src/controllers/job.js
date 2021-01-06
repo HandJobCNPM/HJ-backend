@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const jobs = await jobService.getAllJobs();
 
     if (req.isAuthenticated()) {
-        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs, query: "" })
+        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs, query: "", photoPath: req.user.photoPath })
     } else {
         res.render('jobs', { role: "guest", jobs, query: "" })
     }
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
         if (req.user._id == job.recruiterId) {
             role = 'author';
         }
-        res.render('detail', { role: role, username: req.user.name, id: req.user._id, job });
+        res.render('detail', { role: role, username: req.user.name, id: req.user._id, job, photoPath: req.user.photoPath });
     } else {
         res.render('detail', { role: 'guest', job });
     }

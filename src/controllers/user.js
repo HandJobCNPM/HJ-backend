@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
 const { isCurUser } = require('../middleware/auth/verifyUser');
 const userService = require('../components/user/userService');
+const { resize, upload } = require('../middleware/image/image')
 
 router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
@@ -16,9 +17,8 @@ router.get('/:id', async (req, res) => {
     const user = await userService.getUserById(req.params.id);
 
     if (req.isAuthenticated()) {
-        res.render('profile', { role: "own", username: req.user.name, id: req.user._id, user })
+        res.render('profile', { role: "own", username: req.user.name, id: req.user._id, user, photoPath: req.user.photoPath })
     } else {
-        console.log(user)
         res.render('profile', { role: "guest", user })
     }
 });
@@ -56,5 +56,19 @@ router.delete('/:id', [isLoggedIn, isCurUser], async (req, res) => {
     const userDeleted = await userService.deleteUser(req.params.id);
     res.json(userDeleted);
 });
+
+router.post('/upload-image', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        res.render('404')
+    } else {
+        if (req.isAuthenticated()) {
+            const imageName = req.user._id
+            resize(imageName, req.file.buffer)
+
+            await userService.uploadImage(imageName, `/images/${imageName}.webp`)
+        }
+        res.redirect('/user')
+    }
+})
 
 module.exports = router;

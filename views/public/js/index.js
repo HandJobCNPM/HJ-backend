@@ -69,3 +69,15 @@ $('#search').keypress(function (e) {
         return false;
     }
 })
+
+$('#image').click(function () {
+    $('#upload-image').click()
+})
+
+$('#upload-image').change(function () {
+    if ($(this).val() !== "") {
+        $('#upload-form').submit()
+        return false;
+    }
+})
+

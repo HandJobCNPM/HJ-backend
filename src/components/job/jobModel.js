@@ -14,6 +14,10 @@ let CandidateObj = {
         type: String,
         required: true
     },
+    photoPath: {
+        type: String,
+        default: '/img/user.svg'
+    },
     bid: {
         type: String,
         required: true

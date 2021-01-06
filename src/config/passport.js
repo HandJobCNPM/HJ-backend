@@ -8,6 +8,7 @@ module.exports = passport => {
             usernameField: 'email'
         }, async (email, password, done) => {
             const user = await userService.getUserByEmail(email);
+
             if (user && hash.isPwdMatched(password, user.password)) {
                 return done(null, user);
             }
