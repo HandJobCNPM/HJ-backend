@@ -17,15 +17,19 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const job = await jobService.getJobById(req.params.id);
+    let cmtAllowed;
 
     if (req.isAuthenticated()) {
+        const ssUserId = req.user._id;
+        cmtAllowed = job.comments.find(comment => comment.freelancerId == ssUserId) === undefined;
         let role = 'user';
-        if (req.user._id == job.recruiterId) {
+        if (ssUserId == job.recruiterId) {
             role = 'author';
         }
-        res.render('detail', { role: role, username: req.user.name, id: req.user._id, job, photoPath: req.user.photoPath });
+        console.log(ssUserId);
+        res.render('detail', { cmtAllowed: cmtAllowed, role: role, username: req.user.name, id: ssUserId, job, photoPath: req.user.photoPath });
     } else {
-        res.render('detail', { role: 'guest', job });
+        res.render('detail', { cmtAllowed: cmtAllowed, role: 'guest', job, id: '' });
     }
 });
 
@@ -108,11 +112,12 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     const jobId = req.params.id;
     const freelancerId = req.user._id;
     const freelancerName = req.user.name;
-
     const { applyReason, bid } = req.body;
 
     const job = await jobService.getJobById(jobId);
-    if (job.recruiterId != freelancerId) {
+    // check if user already commented and not recruiter
+    if (job.comments.find(comment => comment.freelancerId == freelancerId) === undefined
+        && job.recruiterId != freelancerId) {
         jobService.appendComment(jobId, freelancerId, freelancerName, bid, applyReason);
 
         // update candidate profile
