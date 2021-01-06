@@ -165,10 +165,19 @@
                             </div>
                             <div class="col-sm-5"><%= comment.applyReason %></div>
                             <div class="col-sm-3">Bid: <%= comment.bid %></div>
+                            <% if (role === "author") { %>
                             <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
                                 <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
                                     Accept
                                 </button>
+                            </div>
+                            <% } %>
+                            <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
+                                <form action="/job/comment/<%= job._id %>?_method=DELETE" method="POST">
+                                    <button type="submit">
+                                        Delete
+                                    </button>
+                                </form>
                             </div>
                             <div class="modal fade" id="DealJob">
                                 <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
