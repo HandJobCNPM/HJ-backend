@@ -172,6 +172,7 @@
                                 </button>
                             </div>
                             <% } %>
+                            <% if (id == comment.freelancerId) { %>
                             <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
                                 <form action="/job/comment/<%= job._id %>?_method=DELETE" method="POST">
                                     <button type="submit">
@@ -179,6 +180,7 @@
                                     </button>
                                 </form>
                             </div>
+                            <% } %>
                             <div class="modal fade" id="DealJob">
                                 <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
                                     <div class="modal-content">
