@@ -15,7 +15,9 @@
             <form action="/user/<%= user._id %>?_method=PUT" method="POST" class="row profile-row" id="personal-info" show="true">
                 <div class="col-lg-3 col-md-4">
                     <div id="image" class="avatar flex f-center fv-center">
-                        <img src="<%= user.photoPath %>" id="image" alt="Ảnh đại diện" >
+                        <img src="<%= user.photoPath %>" <% if (role === "own") { %>
+                            id="image"
+                        <% } %>  alt="Ảnh đại diện" >
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-4">
@@ -104,9 +106,11 @@
         </div>
     </div>
 
-    <form action="/user/upload-image" id="upload-form" show="false" method="POST" enctype="multipart/form-data">
-        <input type="file" show="false" name="image" id="upload-image"/>
-    </form>
+    <% if (role === "own") { %>
+        <form action="/user/upload-image" id="upload-form" show="false" method="POST" enctype="multipart/form-data">
+            <input type="file" show="false" name="image" id="upload-image"/>
+        </form>
+    <% } %>
 
     <%- include('./partials/footer.ejs') %>
     <%- include('./partials/script.ejs') %>
