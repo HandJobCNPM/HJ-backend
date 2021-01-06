@@ -172,6 +172,7 @@
                                 </button>
                             </div>
                             <% } %>
+                            <% if (id == comment.freelancerId) { %>
                             <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
                                 <form action="/job/comment/<%= job._id %>?_method=DELETE" method="POST">
                                     <button type="submit">
@@ -179,6 +180,7 @@
                                     </button>
                                 </form>
                             </div>
+                            <% } %>
                             <div class="modal fade" id="DealJob">
                                 <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
                                     <div class="modal-content">
@@ -208,7 +210,7 @@
                                                         <p>Ngày deal</p>
                                                     </div>
                                                     <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                        <p>3/12/2020</p>
+                                                        <p><%= new Date().toLocaleDateString() %></p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -220,12 +222,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="login-check">
-                                                    <input type="checkbox"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
+                                                    <input type="checkbox" id="agree"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-warning btn-lg btn-block" type="submit">Accept</button>
+                                            <form action="/contract" method="POST">
+                                                <input type="hidden" name="jobId" value="<%= job._id %>" show="false">
+                                                <input type="hidden" name="title" value="<%= job.title %>" show="false">
+                                                <input type="hidden" name="salary" value="<%= comment.bid %>" show="false">
+                                                <input type="hidden" name="recruiterId" value="<%= job.recruiterId %>" show="false">
+                                                <input type="hidden" name="freelancerId" value="<%= comment.freelancerId %>" show="false">
+                                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="accept-contract" disabled>Accept</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

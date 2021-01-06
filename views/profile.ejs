@@ -15,7 +15,9 @@
             <form action="/user/<%= user._id %>?_method=PUT" method="POST" class="row profile-row" id="personal-info" show="true">
                 <div class="col-lg-3 col-md-4">
                     <div id="image" class="avatar flex f-center fv-center">
-                        <img src="<%= user.photoPath %>" id="image" alt="Ảnh đại diện" >
+                        <img src="<%= user.photoPath %>" <% if (role === "own") { %>
+                            id="image"
+                        <% } %>  alt="Ảnh đại diện" >
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-4">
@@ -91,6 +93,14 @@
                         <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
                     </div>
                 <% }) %>
+                <h5>Cong viec da dang</h5>
+                <div>
+                    <% user.recruiterMode.postedJobs.forEach(job => { %>
+                        <div class="achievement">
+                            <a href="/job/<%= job.jobId %>"><%= job.title %></a>
+                        </div>
+                    <% }) %>
+                </div>
             </div>
             <div class="profile-achievement" id="freelancer-info" show="false">
                 <h3>Vị trí freelancer</h3>
@@ -100,13 +110,23 @@
                         <a href="<%= achivement.contractId %>"><%= achivement.title %></a>
                     </div>
                 <% }) %>
+                <h5>Cong viec da chao gia</h5>
+                <div>
+                    <% user.freelancerMode.appliedJobs.forEach(job => { %>
+                        <div class="achievement">
+                            <a href="/job/<%= job.jobId %>"><%= job.title %></a>
+                        </div>
+                    <% }) %>
+                </div>
             </div>
         </div>
     </div>
 
-    <form action="/user/upload-image" id="upload-form" show="false" method="POST" enctype="multipart/form-data">
-        <input type="file" show="false" name="image" id="upload-image"/>
-    </form>
+    <% if (role === "own") { %>
+        <form action="/user/upload-image" id="upload-form" show="false" method="POST" enctype="multipart/form-data">
+            <input type="file" show="false" name="image" id="upload-image"/>
+        </form>
+    <% } %>
 
     <%- include('./partials/footer.ejs') %>
     <%- include('./partials/script.ejs') %>

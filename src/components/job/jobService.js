@@ -87,11 +87,11 @@ module.exports = {
         return true;
     },
 
-    deleteJob: async jobId => {
-        if (!jobId) {
+    deleteJob: async _id => {
+        if (!_id) {
             return false;
         }
-        await Job.deleteOne({ _id: jobId });
+        await Job.deleteOne({ _id });
         return true;
     },
 
@@ -107,8 +107,8 @@ module.exports = {
         if (!jobId || !commentId) {
             return false;
         }
-        const job = await Job.findByIdAndUpdate({ _id: jobId}, {
-            $pull: { comments: { _id: commentId }}
+        const job = await Job.findByIdAndUpdate({ _id: jobId }, {
+            $pull: { comments: { _id: commentId } }
         });
 
         if (!job) {

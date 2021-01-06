@@ -1,29 +1,12 @@
 const mongoose = require('mongoose');
 
-/*
-{CONTRACT}
-+job {title, description, salary, tags}
-+recruiter link
-+freelancer link
-+agreement date (date)
-+freelancer finished (boolean)
-*/
-
 let contractSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
     salary: {
         type: Number,
-        required: true
-    },
-    tags: {
-        type: [String],
         required: true
     },
     recruiterId: {
@@ -38,7 +21,10 @@ let contractSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    finished: Boolean
+    finished: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = Contract = mongoose.model('Contract', contractSchema);
