@@ -15,8 +15,8 @@ module.exports = {
         return errors.length > 0 ? errors : contract;
     },
 
-    createContract: async (salary, recruiterId, freelancerId, acceptDate) => {
-        if (!salary || !recruiterId || !freelancerId || !acceptDate) {
+    createContract: async (salary, recruiterId, freelancerId) => {
+        if (!salary || !recruiterId || !freelancerId) {
             return null;
         }
 
