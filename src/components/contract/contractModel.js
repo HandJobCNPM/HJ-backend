@@ -9,11 +9,23 @@ let contractSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     recruiterId: {
         type: String,
         required: true
     },
     freelancerId: {
+        type: String,
+        required: true
+    },
+    recruiterName: {
+        type: String,
+        required: true
+    },
+    freelancerName: {
         type: String,
         required: true
     },

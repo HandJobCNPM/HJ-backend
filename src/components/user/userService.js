@@ -219,6 +219,7 @@ module.exports = {
         }
         return user;
     },
+
     uploadImage: async (_id, photoPath) => {
         await User.updateOne({ _id }, { photoPath })
     }

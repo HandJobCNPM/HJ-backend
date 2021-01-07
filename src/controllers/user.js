@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn } = require('../middleware/auth/isLoggedIn');
 const { isCurUser } = require('../middleware/auth/verifyUser');
 const userService = require('../components/user/userService');
+const jobService = require('../components/job/jobService');
 const { resize, upload } = require('../middleware/image/image')
 
 router.get('/', async (req, res) => {
@@ -19,7 +20,7 @@ router.get('/:id', async (req, res) => {
     if (req.isAuthenticated()) {
         res.render('profile', { role: "own", username: req.user.name, id: req.user._id, user, photoPath: req.user.photoPath })
     } else {
-        res.render('profile', { role: "guest", user })
+        res.render('profile', { role: "guest", user, photoPath: user.photoPath })
     }
 });
 
@@ -65,7 +66,8 @@ router.post('/upload-image', upload.single('image'), async (req, res) => {
             const imageName = req.user._id
             resize(imageName, req.file.buffer)
 
-            await userService.uploadImage(imageName, `/images/${imageName}.webp`)
+            await userService.uploadImage(imageName, imageName)
+            jobService.updateRecruiterPhoto(req.user._id, imageName)
         }
         res.redirect('/user')
     }

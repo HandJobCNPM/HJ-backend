@@ -15,7 +15,7 @@ module.exports = {
         return job ? job : null;
     },
 
-    createJob: async (recruiterId, recruiterName, title, description, expiration, tags, paidMin, paidMax) => {
+    createJob: async (recruiterId, recruiterName, photoPath, title, description, expiration, tags, paidMin, paidMax) => {
         if (!recruiterId || !title || !description || !expiration || !tags || !paidMin || !paidMax) {
             return null;
         }
@@ -23,6 +23,7 @@ module.exports = {
         const job = new Job({
             recruiterId,
             recruiterName,
+            photoPath,
             title,
             description,
             createDate: Date(),
@@ -95,8 +96,8 @@ module.exports = {
         return true;
     },
 
-    appendComment: (jobId, freelancerId, freelancerName, bid, applyReason) => {
-        const comment = { jobId, freelancerId, freelancerName, bid, applyReason }
+    appendComment: (jobId, freelancerId, photoPath, freelancerName, bid, applyReason) => {
+        const comment = { jobId, freelancerId, photoPath, freelancerName, bid, applyReason }
 
         Job.updateOne({ _id: jobId }, { $push: { comments: comment } }, (err, docs) => {
             if (err) console.log(err)
@@ -123,5 +124,11 @@ module.exports = {
         })
 
         return results
+    },
+
+    updateRecruiterPhoto: (recruiterId, photoPath) => {
+        Job.updateOne({ recruiterId }, { photoPath }, (err, docs) => {
+            if (err) console.log(err)
+        })
     }
 };

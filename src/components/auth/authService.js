@@ -15,6 +15,8 @@ module.exports = {
                 name,
                 email,
                 password: hashedPwd,
+                recruiterMode: {},
+                freelancerMode: {}
             });
             return true;
         }

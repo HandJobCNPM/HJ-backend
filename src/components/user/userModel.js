@@ -30,7 +30,7 @@ let userSchema = new mongoose.Schema({
     },
     photoPath: {
         type: String,
-        default: '/img/user.svg'
+        default: 'user'
     },
     address: {
         type: String,

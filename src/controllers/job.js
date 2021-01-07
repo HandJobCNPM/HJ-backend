@@ -42,7 +42,8 @@ router.post('/', isLoggedIn, async (req, res) => {
         expiration,
         tags,
         paidMin,
-        paidMax
+        paidMax,
+        photoPath
     } = req.body;
     let newJob;
 
@@ -50,6 +51,7 @@ router.post('/', isLoggedIn, async (req, res) => {
         newJob = await jobService.createJob(
             recruiterId,
             recruiterName,
+            photoPath,
             title,
             description,
             expiration,
@@ -112,13 +114,13 @@ router.post('/comment/:id', isLoggedIn, async (req, res) => {
     const jobId = req.params.id;
     const freelancerId = req.user._id;
     const freelancerName = req.user.name;
-    const { applyReason, bid } = req.body;
+    const { applyReason, bid, photoPath } = req.body;
 
     const job = await jobService.getJobById(jobId);
     // check if user already commented and not recruiter
     if (job.comments.find(comment => comment.freelancerId == freelancerId) === undefined
         && job.recruiterId != freelancerId) {
-        jobService.appendComment(jobId, freelancerId, freelancerName, bid, applyReason);
+        jobService.appendComment(jobId, freelancerId, photoPath, freelancerName, bid, applyReason);
 
         // update candidate profile
         userService.addJob(freelancerId, 'freelancer', jobId, job.title);

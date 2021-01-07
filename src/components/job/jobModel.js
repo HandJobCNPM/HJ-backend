@@ -16,7 +16,7 @@ let CandidateObj = {
     },
     photoPath: {
         type: String,
-        default: '/img/user.svg'
+        required: true
     },
     bid: {
         type: String,
@@ -34,6 +34,10 @@ let jobSchema = new mongoose.Schema({
         required: true
     },
     recruiterName: {
+        type: String,
+        required: true
+    },
+    photoPath: {
         type: String,
         required: true
     },

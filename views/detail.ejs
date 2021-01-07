@@ -96,36 +96,38 @@
                 <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12 col-12 border border-secondary">
                     <h5>Thông tin dự án</h5>
                     <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p>Ngày đăng</p>
                         </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p><%= job.createDate.toDateString() %></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p>Hạn chót</p>
                         </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p><%= job.expiration.toDateString() %></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p>Ngân sách</p>
                         </div>
-                        <div class="col-lg-7 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <p><%= job.paidMin %>  đ - <%= job.paidMax %>  đ</p>
                         </div>
                     </div>
                     <br>
                     <h5>Thông tin khách hàng</h5>
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 col-4">
-                            <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 100px;height: 100px;">
+                        <div class="col-lg-6 col-md-6 col-6">
+                            <div id="image" class="avatar flex f-center fv-center">
+                                <img src="/images/<%= job.photoPath %>.webp" alt="Ảnh đại diện" >
+                            </div>
                         </div>
-                        <div class="col-lg-8 offset-lg-1 col-md-8 col-8">
+                        <div class="col-lg-6 col-md-6 col-6">
                             <p><%= job.recruiterName %></p>
                         </div>
                     </div>
@@ -143,6 +145,7 @@
                       <input name="bid" type="number" min="<%= job.paidMin %>" max="<%= job.paidMax %>" class="form-control form-control-sm" id="colFormLabelSm" placeholder="<%= job.paidMax %>" required>
                     </div>
                 </div>
+                <input type="hidden" name="photoPath" value="<%= photoPath %>">
                 <div class="form-group row">
                     <div class="col-sm-10 text-center">
                       <button type="submit" class="btn btn-primary">Apply</button>
@@ -153,90 +156,91 @@
             <% } %>
             <% job.comments.forEach(comment => { %>
                 <div class="row border bg pt-4 pb-5 mb-4">
-                    <div class="col-lg-5 col-md-9 col-sm-8 col-12">
-                        <div class="row">
-                            <div class="col-sm-2 col-md-3 col-sm-4 col-12 text-center">
-                                <a href="/user/<%= comment.freelancerId %>">
-                                    <img src="/img/user.svg" alt="Ảnh đại diện" style="width: 50px;height: 50px;">
-                                </a>
-                                <div class="col-lg-7 col-md-7 col-sm-7 col-7">
-                                    <h5><%= comment.freelancerName %></h5>
+                    <div class="col-sm-2 col-md-3 col-sm-4 col-12 text-center">
+                        <a href="/user/<%= comment.freelancerId %>">
+                            <div id="image" class="avatar flex f-center fv-center">
+                                <img src="/images/<%= comment.photoPath %>.webp" alt="Ảnh đại diện" >
+                            </div>
+                        </a>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-7">
+                            <h5><%= comment.freelancerName %></h5>
+                        </div>
+                    </div>
+                    <div class="col-sm-5"><%= comment.applyReason %></div>
+                    <div class="col-sm-3">Bid: <%= comment.bid %></div>
+                    <% if (role === "author") { %>
+                    <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
+                            Accept
+                        </button>
+                    </div>
+                    <% } %>
+                    <% if (id == comment.freelancerId) { %>
+                    <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
+                        <form action="/job/comment/<%= job._id %>?_method=DELETE" method="POST">
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                    <% } %>
+                    <div class="modal fade" id="DealJob">
+                        <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">Thỏa thuận</h1>
                                 </div>
-                            </div>
-                            <div class="col-sm-5"><%= comment.applyReason %></div>
-                            <div class="col-sm-3">Bid: <%= comment.bid %></div>
-                            <% if (role === "author") { %>
-                            <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
-                                <button class="btn btn-success" data-toggle="modal" data-target="#DealJob">
-                                    Accept
-                                </button>
-                            </div>
-                            <% } %>
-                            <% if (id == comment.freelancerId) { %>
-                            <div class="col-md-2 col-sm-5 col-5 text-right pull-right">
-                                <form action="/job/comment/<%= job._id %>?_method=DELETE" method="POST">
-                                    <button type="submit">
-                                        Delete
-                                    </button>
-                                </form>
-                            </div>
-                            <% } %>
-                            <div class="modal fade" id="DealJob">
-                                <div class="modal-dialog modal-dialog-scrollable modal-xl modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title">Thỏa thuận</h1>
-                                        </div>
-                                        <div class="modal-body row">
-                                            <div class="col-md-10 offset-md-2">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                        <p>Tên nhà tuyển dụng</p>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                        <p><%= job.recruiterName %></p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                        <p>Tên Freelancer</p>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                        <p><%= comment.freelancerName %></p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                        <p>Ngày deal</p>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                        <p><%= new Date().toLocaleDateString() %></p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                                        <p>Gía thoả thuân</p>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-                                                        <p><%= comment.bid %> đ</p>
-                                                    </div>
-                                                </div>
-                                                <div class="login-check">
-                                                    <input type="checkbox" id="agree"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
-                                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-10 offset-md-2">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                <p>Tên nhà tuyển dụng</p>
+                                            </div>
+                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                <p><%= job.recruiterName %></p>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <form action="/contract" method="POST">
-                                                <input type="hidden" name="jobId" value="<%= job._id %>" show="false">
-                                                <input type="hidden" name="title" value="<%= job.title %>" show="false">
-                                                <input type="hidden" name="salary" value="<%= comment.bid %>" show="false">
-                                                <input type="hidden" name="recruiterId" value="<%= job.recruiterId %>" show="false">
-                                                <input type="hidden" name="freelancerId" value="<%= comment.freelancerId %>" show="false">
-                                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="accept-contract" disabled>Accept</button>
-                                            </form>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                <p>Tên Freelancer</p>
+                                            </div>
+                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                <p><%= comment.freelancerName %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                <p>Ngày deal</p>
+                                            </div>
+                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                <p><%= new Date().toLocaleDateString() %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                                                <p>Gía thoả thuân</p>
+                                            </div>
+                                            <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                                                <p><%= comment.bid %> đ</p>
+                                            </div>
+                                        </div>
+                                        <div class="login-check">
+                                            <input type="checkbox" id="agree"> Chấp nhận các <b>điều khoản</b> của thỏa thuận
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="/contract" method="POST">
+                                        <input type="hidden" name="jobId" value="<%= job._id %>">
+                                        <input type="hidden" name="title" value="<%= job.title %>">
+                                        <input type="hidden" name="salary" value="<%= comment.bid %>">
+                                        <input type="hidden" name="recruiterId" value="<%= job.recruiterId %>">
+                                        <input type="hidden" name="freelancerId" value="<%= comment.freelancerId %>">
+                                        <input type="hidden" name="recruiterName" value="<%= job.recruiterName %>">
+                                        <input type="hidden" name="description" value="<%= job.description %>">
+                                        <input type="hidden" name="freelancerName" value="<%= comment.freelancerName %>">
+                                        <button class="btn btn-warning btn-lg btn-block" type="submit" id="accept-contract" disabled>Accept</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

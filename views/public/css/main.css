@@ -19,7 +19,7 @@ h3 {
 }
 
 p {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .footer {
@@ -216,14 +216,14 @@ button:disabled:hover {
     margin-left: 20px;
 }
 
-.profile, .job-detail {
+.profile, .job-detail, .contract {
     min-height: calc(100vh - 56px);
     height: 100%;
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-.profile-box, .job-detail-box {
+.profile-box, .job-detail-box, .contract-box {
     width: 100%;
     background-color: white;
 }
