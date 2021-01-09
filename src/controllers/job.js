@@ -158,7 +158,7 @@ router.get('/search/:id', async (req, res) => {
     let results = await jobService.searchJob(query)
 
     if (req.isAuthenticated()) {
-        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs: results, query })
+        res.render('jobs', { role: "user", username: req.user.name, id: req.user._id, jobs: results, query, photoPath: req.user.photoPath })
     } else {
         res.render('jobs', { role: "guest", jobs: results, query })
     }
