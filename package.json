@@ -4,11 +4,11 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "server": "nodemon ./src/app.js",
+        "start": "nodemon ./src/app.js",
         "db": "mongod.exe --dbpath=c:/Program Files/MongoDB/Server/4.4/data",
         "dbServer": "mongo.exe",
         "dev": "concurrently \"npm run db\" \"npm run dbServer\" \"npm run server\"",
-        "start": "nodemon ./src/app.js"
+        "product": "node ./src/app.js"
     },
     "repository": {
         "type": "git",
